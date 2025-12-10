@@ -1,11 +1,10 @@
-package com.example.jquiz.data.dao
+package com.example.jquiz.data.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.jquiz.data.models.HistoricEvent
 import kotlinx.coroutines.flow.Flow
-
 
 @Dao
 interface  HistoricEventsDAO {

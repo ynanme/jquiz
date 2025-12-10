@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.jquiz.data.dao.ChemicalElementsDAO
-import com.example.jquiz.data.dao.CountriesDAO
-import com.example.jquiz.data.dao.FootballTeamsDAO
-import com.example.jquiz.data.dao.HistoricEventsDAO
-import com.example.jquiz.data.dao.PlanetsDAO
+import com.example.jquiz.data.daos.ChemicalElementsDAO
+import com.example.jquiz.data.daos.CountriesDAO
+import com.example.jquiz.data.daos.FootballTeamsDAO
+import com.example.jquiz.data.daos.HistoricEventsDAO
+import com.example.jquiz.data.daos.PlanetsDAO
 import com.example.jquiz.data.models.Planet
 import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.models.FootballTeam
