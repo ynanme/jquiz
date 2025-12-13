@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.jquiz.screens.MainScreen
 import com.example.jquiz.ui.theme.JQuizTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             JQuizTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    App(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -45,4 +45,12 @@ fun GreetingPreview() {
     JQuizTheme {
         Greeting("JQuiz")
     }
+}
+
+
+@Composable
+fun App (modifier: Modifier = Modifier) {
+
+    MainScreen()
+
 }
