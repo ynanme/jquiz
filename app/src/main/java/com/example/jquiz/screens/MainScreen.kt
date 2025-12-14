@@ -1,19 +1,29 @@
 package com.example.jquiz.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavBackStack
@@ -21,6 +31,8 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 
@@ -49,31 +61,51 @@ sealed interface Screen: NavKey {
 @Composable
 fun MainScreen () {
 
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val scope = rememberCoroutineScope()
     val backStack = rememberNavBackStack(Screen.Quiz)
 
-    Scaffold (
-        topBar = { TopBar("${backStack.last()}") },
-        bottomBar = { BottomBar(backStack, listOf(Screen.Quiz, Screen.Learning, Screen.History)) }
-    ) { paddingValues ->
-        NavDisplay(
-            backStack=backStack,
-            modifier = Modifier.padding(paddingValues),
-            entryProvider = entryProvider {
-                entry<Screen.Quiz> { QuizScreen() }
-                entry<Screen.Learning> { LearningScreen() }
-                entry<Screen.History> { HistoryScreen() }
-            }
-        )
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = { ModalDrawerSheet { DrawerContent() } }
+    ) {
+        Scaffold (
+            topBar = { TopBar("${backStack.last()}") { scopeLauncher(drawerState, scope) } },
+            bottomBar = { BottomBar(backStack, listOf(Screen.Quiz, Screen.Learning, Screen.History)) }
+        ) { paddingValues ->
+            NavDisplay(
+                backStack=backStack,
+                modifier = Modifier.padding(paddingValues),
+                entryProvider = entryProvider {
+                    entry<Screen.Quiz> { QuizScreen() }
+                    entry<Screen.Learning> { LearningScreen() }
+                    entry<Screen.History> { HistoryScreen() }
+                }
+            )
+        }
     }
 
 }
 
 
+@Composable
+fun DrawerContent () {
+    Column {
+        NavigationDrawerItem(selected = false, label = { Text("Account") }, onClick = {})
+        NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
+        NavigationDrawerItem(selected = false, label = { Text("Notifications") }, onClick = {})
+        NavigationDrawerItem(selected = false, label = { Text("About") }, onClick = {})
+
+    }
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar (currentScreen: String) {
+fun TopBar (currentScreen: String, launchScope: () -> Unit) {
     CenterAlignedTopAppBar(
-        title = { Text(currentScreen) }
+        title = { Text(currentScreen) },
+        navigationIcon = { IconButton(onClick = launchScope) { Icon(Icons.Default.Menu, contentDescription = "Menu") } }
     )
 }
 
@@ -88,6 +120,18 @@ fun BottomBar (backStack: NavBackStack<NavKey>, screens: List<Screen>) {
                 onClick = { backStack += it },
                 icon = { Icon(it.icon, "$it") }
             )
+        }
+    }
+}
+
+
+
+fun scopeLauncher (drawerState: DrawerState, scope: CoroutineScope) {
+    scope.launch {
+        if (drawerState.isClosed) {
+            drawerState.open()
+        } else {
+            drawerState.close()
         }
     }
 }
