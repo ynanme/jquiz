@@ -4,11 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.jquiz.data.daos.ChemicalElementsDAO
-import com.example.jquiz.data.daos.CountriesDAO
-import com.example.jquiz.data.daos.FootballTeamsDAO
-import com.example.jquiz.data.daos.HistoricEventsDAO
-import com.example.jquiz.data.daos.PlanetsDAO
+import com.example.jquiz.data.daos.ChemicalElementsDao
+import com.example.jquiz.data.daos.CountriesDao
+import com.example.jquiz.data.daos.FootballTeamsDao
+import com.example.jquiz.data.daos.HistoricEventsDao
+import com.example.jquiz.data.daos.PlanetsDao
 import com.example.jquiz.data.models.Planet
 import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.models.FootballTeam
@@ -20,11 +20,11 @@ import com.example.jquiz.data.models.HistoricEvent
 abstract  class Knowledge : RoomDatabase() {
 
 
-    abstract  fun chemicalElementsDAO (): ChemicalElementsDAO
-    abstract  fun countriesDAO (): CountriesDAO
-    abstract  fun footballTeamsDAO (): FootballTeamsDAO
-    abstract  fun historicEventsDAO (): HistoricEventsDAO
-    abstract  fun planetsDAO (): PlanetsDAO
+    abstract  fun chemicalElementsDao (): ChemicalElementsDao
+    abstract  fun countriesDao (): CountriesDao
+    abstract  fun footballTeamsDao (): FootballTeamsDao
+    abstract  fun historicEventsDao (): HistoricEventsDao
+    abstract  fun planetsDao (): PlanetsDao
 
 
     companion object {

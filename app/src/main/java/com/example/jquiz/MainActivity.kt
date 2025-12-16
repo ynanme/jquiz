@@ -50,7 +50,5 @@ fun GreetingPreview() {
 
 @Composable
 fun App (modifier: Modifier = Modifier) {
-
     MainScreen()
-
 }

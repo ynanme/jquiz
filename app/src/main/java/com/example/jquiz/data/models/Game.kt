@@ -7,9 +7,9 @@ import java.sql.Date
 @Entity
 data class Game (
     @PrimaryKey(autoGenerate = true)
-    val Id : Int = 0,
-    val FinalScore: Int,
-    val Difficulty : Int,
-    val EndedGame : Boolean,
-    val Date : Date
+    val id : Int = 0,
+    val finalScore: Int,
+    val difficulty : Int,
+    val endedGame : Boolean,
+    val date : Date
 )

@@ -3,10 +3,7 @@ package com.example.jquiz.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -20,43 +17,18 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.example.jquiz.interfaces.Screen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.serialization.Serializable
-
-
-sealed interface Screen: NavKey {
-
-    val icon: ImageVector
-
-    @Serializable
-    data object  Quiz: Screen {
-        override val icon = Icons.Filled.Quiz
-    }
-
-    @Serializable
-    data object Learning: Screen {
-        override val icon = Icons.Filled.Book
-    }
-
-    @Serializable
-    data object History: Screen {
-        override val icon = Icons.Filled.History
-    }
-
-}
-
 
 @Composable
 fun MainScreen () {

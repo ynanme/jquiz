@@ -17,10 +17,10 @@ import androidx.room.PrimaryKey
 ])
 data class GameQuestions (
     @PrimaryKey(autoGenerate = true)
-    val Id : Int = 0,
-    val DataId : Int,
-    val TotalDifficulty : Int,
-    val Score : Int,
-    val Field : String,
-    val GameId : Int
+    val id : Int = 0,
+    val dataId : Int,
+    val totalDifficulty : Int,
+    val score : Int,
+    val field : String,
+    val gameId : Int
 )

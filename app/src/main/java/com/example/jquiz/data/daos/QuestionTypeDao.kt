@@ -9,11 +9,11 @@ import com.example.jquiz.data.models.QuestionType
 interface QuestionTypeDao {
 
     @Insert
-    suspend fun AddQuestionType(qt : QuestionType)
+    suspend fun addQuestionType(qt : QuestionType)
 
     @Query("SELECT * FROM QuestionType WHERE Id = id")
-    suspend fun GetQuestionTypeById(id : Int)
+    suspend fun getQuestionTypeById(id : Int)
 
     @Query("SELECT * FROM QuestionType")
-    suspend fun LoadAllQuestionType();
+    suspend fun loadAllQuestionType();
 }
