@@ -1,0 +1,37 @@
+[
+  { "id": 1,  "club": "Real Madrid",        "city": "Madrid",        "yearOfFoundation": 1902, "c1Count": 15, "euCount": 2, "notoriety": 1 },
+  { "id": 2,  "club": "FC Barcelona",       "city": "Barcelone",     "yearOfFoundation": 1899, "c1Count": 5,  "euCount": 5, "notoriety": 1 },
+  { "id": 3,  "club": "Manchester United",  "city": "Manchester",    "yearOfFoundation": 1878, "c1Count": 3,  "euCount": 1, "notoriety": 1 },
+  { "id": 4,  "club": "AC Milan",            "city": "Milan",         "yearOfFoundation": 1899, "c1Count": 7,  "euCount": 2, "notoriety": 1 },
+  { "id": 5,  "club": "Bayern Munich",       "city": "Munich",        "yearOfFoundation": 1900, "c1Count": 6,  "euCount": 1, "notoriety": 1 },
+
+  { "id": 6,  "club": "Liverpool",           "city": "Liverpool",     "yearOfFoundation": 1892, "c1Count": 6,  "euCount": 3, "notoriety": 1 },
+  { "id": 7,  "club": "Chelsea",             "city": "Londres",       "yearOfFoundation": 1905, "c1Count": 2,  "euCount": 2, "notoriety": 1 },
+  { "id": 8,  "club": "Juventus",             "city": "Turin",         "yearOfFoundation": 1897, "c1Count": 2,  "euCount": 3, "notoriety": 1 },
+  { "id": 9,  "club": "Paris Saint-Germain", "city": "Paris",         "yearOfFoundation": 1970, "c1Count": 0,  "euCount": 1, "notoriety": 1 },
+  { "id": 10, "club": "Inter Milan",          "city": "Milan",         "yearOfFoundation": 1908, "c1Count": 3,  "euCount": 3, "notoriety": 1 },
+
+  { "id": 11, "club": "Ajax",                 "city": "Amsterdam",    "yearOfFoundation": 1900, "c1Count": 4,  "euCount": 1, "notoriety": 2 },
+  { "id": 12, "club": "Borussia Dortmund",    "city": "Dortmund",      "yearOfFoundation": 1909, "c1Count": 1,  "euCount": 1, "notoriety": 2 },
+  { "id": 13, "club": "Atletico Madrid",      "city": "Madrid",        "yearOfFoundation": 1903, "c1Count": 0,  "euCount": 3, "notoriety": 2 },
+  { "id": 14, "club": "Arsenal",               "city": "Londres",       "yearOfFoundation": 1886, "c1Count": 0,  "euCount": 1, "notoriety": 2 },
+  { "id": 15, "club": "Tottenham",             "city": "Londres",       "yearOfFoundation": 1882, "c1Count": 0,  "euCount": 2, "notoriety": 2 },
+
+  { "id": 16, "club": "Napoli",                "city": "Naples",        "yearOfFoundation": 1926, "c1Count": 0,  "euCount": 1, "notoriety": 3 },
+  { "id": 17, "club": "AS Roma",                "city": "Rome",          "yearOfFoundation": 1927, "c1Count": 0,  "euCount": 1, "notoriety": 3 },
+  { "id": 18, "club": "Benfica",                "city": "Lisbonne",      "yearOfFoundation": 1904, "c1Count": 2,  "euCount": 1, "notoriety": 3 },
+  { "id": 19, "club": "Porto",                  "city": "Porto",         "yearOfFoundation": 1893, "c1Count": 2,  "euCount": 2, "notoriety": 3 },
+  { "id": 20, "club": "Celtic",                 "city": "Glasgow",       "yearOfFoundation": 1887, "c1Count": 1,  "euCount": 0, "notoriety": 3 },
+
+  { "id": 21, "club": "Rangers",                "city": "Glasgow",       "yearOfFoundation": 1872, "c1Count": 0,  "euCount": 0, "notoriety": 4 },
+  { "id": 22, "club": "Feyenoord",               "city": "Rotterdam",     "yearOfFoundation": 1908, "c1Count": 1,  "euCount": 2, "notoriety": 4 },
+  { "id": 23, "club": "PSV Eindhoven",           "city": "Eindhoven",     "yearOfFoundation": 1913, "c1Count": 1,  "euCount": 1, "notoriety": 4 },
+  { "id": 24, "club": "Anderlecht",              "city": "Bruxelles",     "yearOfFoundation": 1908, "c1Count": 0,  "euCount": 2, "notoriety": 4 },
+  { "id": 25, "club": "Galatasaray",             "city": "Istanbul",      "yearOfFoundation": 1905, "c1Count": 0,  "euCount": 1, "notoriety": 4 },
+
+  { "id": 26, "club": "Red Star Belgrade",       "city": "Belgrade",      "yearOfFoundation": 1945, "c1Count": 1,  "euCount": 0, "notoriety": 5 },
+  { "id": 27, "club": "Steaua Bucarest",         "city": "Bucarest",      "yearOfFoundation": 1947, "c1Count": 1,  "euCount": 0, "notoriety": 5 },
+  { "id": 28, "club": "Dinamo Kiev",              "city": "Kiev",          "yearOfFoundation": 1927, "c1Count": 0,  "euCount": 0, "notoriety": 5 },
+  { "id": 29, "club": "Shakhtar Donetsk",         "city": "Donetsk",       "yearOfFoundation": 1936, "c1Count": 0,  "euCount": 1, "notoriety": 5 },
+  { "id": 30, "club": "Partizan Belgrade",        "city": "Belgrade",      "yearOfFoundation": 1945, "c1Count": 0,  "euCount": 0, "notoriety": 5 }
+]

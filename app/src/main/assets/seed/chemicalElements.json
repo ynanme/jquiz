@@ -1,0 +1,25 @@
+[
+  { "id": 1,  "element": "Hydrogène", "atomicNumber": 1,  "atomicMass": 1,   "notoriety": 1 },
+  { "id": 2,  "element": "Hélium",    "atomicNumber": 2,  "atomicMass": 4,   "notoriety": 2 },
+  { "id": 3,  "element": "Lithium",   "atomicNumber": 3,  "atomicMass": 7,   "notoriety": 3 },
+  { "id": 4,  "element": "Béryllium", "atomicNumber": 4,  "atomicMass": 9,   "notoriety": 4 },
+  { "id": 5,  "element": "Bore",      "atomicNumber": 5,  "atomicMass": 11,  "notoriety": 4 },
+
+  { "id": 6,  "element": "Carbone",   "atomicNumber": 6,  "atomicMass": 12,  "notoriety": 1 },
+  { "id": 7,  "element": "Azote",     "atomicNumber": 7,  "atomicMass": 14,  "notoriety": 2 },
+  { "id": 8,  "element": "Oxygène",   "atomicNumber": 8,  "atomicMass": 16,  "notoriety": 1 },
+  { "id": 9,  "element": "Fluor",     "atomicNumber": 9,  "atomicMass": 19,  "notoriety": 3 },
+  { "id": 10, "element": "Néon",      "atomicNumber": 10, "atomicMass": 20,  "notoriety": 3 },
+
+  { "id": 11, "element": "Sodium",    "atomicNumber": 11, "atomicMass": 23,  "notoriety": 2 },
+  { "id": 12, "element": "Magnésium", "atomicNumber": 12, "atomicMass": 24,  "notoriety": 2 },
+  { "id": 13, "element": "Aluminium", "atomicNumber": 13, "atomicMass": 27,  "notoriety": 2 },
+  { "id": 14, "element": "Silicium",  "atomicNumber": 14, "atomicMass": 28,  "notoriety": 3 },
+  { "id": 15, "element": "Phosphore", "atomicNumber": 15, "atomicMass": 31,  "notoriety": 3 },
+
+  { "id": 16, "element": "Soufre",    "atomicNumber": 16, "atomicMass": 32,  "notoriety": 3 },
+  { "id": 17, "element": "Chlore",    "atomicNumber": 17, "atomicMass": 35,  "notoriety": 2 },
+  { "id": 18, "element": "Argon",     "atomicNumber": 18, "atomicMass": 40,  "notoriety": 4 },
+  { "id": 19, "element": "Potassium", "atomicNumber": 19, "atomicMass": 39,  "notoriety": 3 },
+  { "id": 20, "element": "Calcium",   "atomicNumber": 20, "atomicMass": 40,  "notoriety": 2 }
+]

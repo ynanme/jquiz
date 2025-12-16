@@ -11,7 +11,7 @@ data class HistoricEvent (
     @PrimaryKey
     val id: Int,
     val event: String,
-    val date: String,
+    val date: Int,
     val notoriety: Int
 )
 

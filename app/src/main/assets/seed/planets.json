@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "planet": "Mercure",
+    "mass": 330,
+    "diameter": 4879,
+    "position": 1,
+    "temperature": 167,
+    "notoriety": 3
+  },
+  {
+    "id": 2,
+    "planet": "Vénus",
+    "mass": 4867,
+    "diameter": 12104,
+    "position": 2,
+    "temperature": 464,
+    "notoriety": 2
+  },
+  {
+    "id": 3,
+    "planet": "Terre",
+    "mass": 5972,
+    "diameter": 12742,
+    "position": 3,
+    "temperature": 15,
+    "notoriety": 1
+  },
+  {
+    "id": 4,
+    "planet": "Mars",
+    "mass": 642,
+    "diameter": 6779,
+    "position": 4,
+    "temperature": -63,
+    "notoriety": 2
+  },
+  {
+    "id": 5,
+    "planet": "Jupiter",
+    "mass": 1898000,
+    "diameter": 139820,
+    "position": 5,
+    "temperature": -110,
+    "notoriety": 2
+  },
+  {
+    "id": 6,
+    "planet": "Saturne",
+    "mass": 568000,
+    "diameter": 116460,
+    "position": 6,
+    "temperature": -140,
+    "notoriety": 3
+  },
+  {
+    "id": 7,
+    "planet": "Uranus",
+    "mass": 86810,
+    "diameter": 50724,
+    "position": 7,
+    "temperature": -195,
+    "notoriety": 4
+  },
+  {
+    "id": 8,
+    "planet": "Neptune",
+    "mass": 102400,
+    "diameter": 49244,
+    "position": 8,
+    "temperature": -200,
+    "notoriety": 5
+  }
+]

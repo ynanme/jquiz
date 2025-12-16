@@ -1,0 +1,37 @@
+[
+  { "id": 1,  "event": "Chute de l’Empire romain d’Occident", "date": 476,  "notoriety": 1 },
+  { "id": 2,  "event": "Découverte de l’Amérique par Christophe Colomb", "date": 1492, "notoriety": 1 },
+  { "id": 3,  "event": "Révolution française", "date": 1789, "notoriety": 1 },
+  { "id": 4,  "event": "Indépendance des États-Unis", "date": 1776, "notoriety": 1 },
+  { "id": 5,  "event": "Première Guerre mondiale", "date": 1914, "notoriety": 1 },
+
+  { "id": 6,  "event": "Seconde Guerre mondiale", "date": 1939, "notoriety": 1 },
+  { "id": 7,  "event": "Chute du mur de Berlin", "date": 1989, "notoriety": 1 },
+  { "id": 8,  "event": "Révolution industrielle", "date": 1760, "notoriety": 2 },
+  { "id": 9,  "event": "Fondation de l’ONU", "date": 1945, "notoriety": 2 },
+  { "id": 10, "event": "Début de la guerre froide", "date": 1947, "notoriety": 2 },
+
+  { "id": 11, "event": "Prise de Constantinople par les Ottomans", "date": 1453, "notoriety": 2 },
+  { "id": 12, "event": "Renaissance européenne", "date": 1400, "notoriety": 2 },
+  { "id": 13, "event": "Indépendance de l’Algérie", "date": 1962, "notoriety": 2 },
+  { "id": 14, "event": "Traité de Versailles", "date": 1919, "notoriety": 2 },
+  { "id": 15, "event": "Réforme protestante", "date": 1517, "notoriety": 2 },
+
+  { "id": 16, "event": "Guerres napoléoniennes", "date": 1803, "notoriety": 3 },
+  { "id": 17, "event": "Unification de l’Allemagne", "date": 1871, "notoriety": 3 },
+  { "id": 18, "event": "Unification de l’Italie", "date": 1861, "notoriety": 3 },
+  { "id": 19, "event": "Révolution russe", "date": 1917, "notoriety": 3 },
+  { "id": 20, "event": "Guerre du Vietnam", "date": 1955, "notoriety": 3 },
+
+  { "id": 21, "event": "Fondation de l’Empire ottoman", "date": 1299, "notoriety": 4 },
+  { "id": 22, "event": "Guerre de Cent Ans", "date": 1337, "notoriety": 4 },
+  { "id": 23, "event": "Concile de Trente", "date": 1545, "notoriety": 4 },
+  { "id": 24, "event": "Traité de Tordesillas", "date": 1494, "notoriety": 4 },
+  { "id": 25, "event": "Révolutions de 1848", "date": 1848, "notoriety": 4 },
+
+  { "id": 26, "event": "Paix de Westphalie", "date": 1648, "notoriety": 5 },
+  { "id": 27, "event": "Guerres puniques", "date": -264, "notoriety": 5 },
+  { "id": 28, "event": "Fondation de la Ligue hanséatique", "date": 1150, "notoriety": 5 },
+  { "id": 29, "event": "Révolte des Taiping", "date": 1850, "notoriety": 5 },
+  { "id": 30, "event": "Bataille de Manzikert", "date": 1071, "notoriety": 5 }
+]
