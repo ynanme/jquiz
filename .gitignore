@@ -15,6 +15,7 @@
 /.idea/shelf/
 /.idea/deploymentTargetSelector.xml
 .idea/deviceManager.xml
+.idea/inspectionProfiles/Project_Default.xml
 
 # === Kotlin internal ===
 .kotlin/

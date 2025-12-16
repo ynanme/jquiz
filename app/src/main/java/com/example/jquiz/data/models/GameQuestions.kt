@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 
 @Entity (foreignKeys = [
     ForeignKey(entity = Game::class,
-    parentColumns = ["Id"],
-    childColumns = ["GameId"],
+    parentColumns = ["id"],
+    childColumns = ["gameId"],
     onDelete = ForeignKey.CASCADE),
 
         ForeignKey(entity = QuestionType::class,
-            parentColumns = ["Id"],
-            childColumns = ["TypeQuestionId"],
+            parentColumns = ["id"],
+            childColumns = ["typeQuestionId"],
             onDelete = ForeignKey.CASCADE)
 ])
 data class GameQuestions (
@@ -22,5 +22,7 @@ data class GameQuestions (
     val totalDifficulty : Int,
     val score : Int,
     val field : String,
-    val gameId : Int
+    val attribute : String,
+    val gameId : Int,
+    val typeQuestionId : Int
 )
