@@ -10,7 +10,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
 import com.example.jquiz.data.enums.QuestionKind
-import com.example.jquiz.viewmodels.QCMViewModel
 import com.example.jquiz.viewmodels.QuizViewModelFactory
 
 
@@ -26,11 +25,13 @@ fun Quizer (
 
     when (chosenType) {
 
-        QuestionKind.QCM -> QCM(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)))
+        QuestionKind.QCM -> QCM(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
 
         else -> {
-            Text("Unsupported Quiz !")
-            Button(onClick = onPrevious) { Text("<- Back") }
+            Column {
+                Text("Unsupported Quiz !")
+                Button(onClick = onPrevious) { Text("<- Back") }
+            }
         }
 
     }

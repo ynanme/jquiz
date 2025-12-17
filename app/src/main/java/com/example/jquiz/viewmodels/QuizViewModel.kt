@@ -9,7 +9,7 @@ import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
 
 
-open class QuizViewModel (application: Application, domains: List<Fields>, level: Difficulty): AndroidViewModel(application) {
+open class QuizViewModel (application: Application, protected val domains: List<Fields>, protected val level: Difficulty): AndroidViewModel(application) {
 
     private val db = Knowledge.getDB(application)
 
