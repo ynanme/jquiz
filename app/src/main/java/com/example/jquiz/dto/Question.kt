@@ -20,3 +20,13 @@ data class QCM(
 )
 
 
+data class DynamicSortItem (
+    val label: String,
+    val value: Int,
+    val ranking: Int
+)
+
+data class DynamicSortQuestion(
+    val label: String,
+    val items: List<DynamicSortItem>
+)

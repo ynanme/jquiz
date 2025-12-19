@@ -26,7 +26,10 @@ fun Quizer (
     when (chosenType) {
 
         QuestionKind.QCM -> QCM(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+
         QuestionKind.PRECISION ->Precision(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+
+        QuestionKind.DYNAMIC_SORT -> DynamicSort(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
 
         else -> {
             Column {

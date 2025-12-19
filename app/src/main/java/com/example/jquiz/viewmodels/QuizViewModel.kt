@@ -45,13 +45,18 @@ class QuizViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
         return when {
+
             modelClass.isAssignableFrom(PrecisionViewModel::class.java) ->
                 PrecisionViewModel(application, domains, level) as T
 
             modelClass.isAssignableFrom(QCMViewModel::class.java) ->
                 QCMViewModel(application, domains, level) as T
 
-            else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+            modelClass.isAssignableFrom(DynamicSortViewModel::class.java) ->
+                DynamicSortViewModel(application, domains, level) as T
+
+            else -> throw IllegalArgumentException("Unknown ViewModel")
+
         }
     }
 }
