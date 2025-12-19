@@ -6,10 +6,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.daos.SeedableDao
+import com.example.jquiz.data.models.Country
+import com.example.jquiz.interfaces.DataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface  ChemicalElementsDao : SeedableDao<ChemicalElement>{
+interface  ChemicalElementsDao : DataSource<ChemicalElement>, SeedableDao<ChemicalElement>{
 
     @Insert
     suspend fun insertElement (element: ChemicalElement): Long
@@ -22,6 +24,9 @@ interface  ChemicalElementsDao : SeedableDao<ChemicalElement>{
 
     @Query("SELECT COUNT(*) FROM ChemicalElement")
     override suspend fun count(): Int
+
+    @Query("""SELECT * FROM ChemicalElement WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<ChemicalElement>
 
 
 }

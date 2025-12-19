@@ -16,6 +16,7 @@ roomCompiler = "2.8.4"
 materialIconsExtended = "1.7.8"
 navigation3 = "1.0.0"
 kotlinxSerializationJson = "1.7.3"
+kotlinReflectVersion = "2.0.21"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +41,7 @@ androidx-material-icons-extended = { group = "androidx.compose.material", name =
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3" }
 androidx-navigation3-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "navigation3" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+jetbrains-kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlinReflectVersion" }
 
 
 [plugins]

@@ -6,10 +6,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.daos.SeedableDao
+import com.example.jquiz.data.models.Country
+import com.example.jquiz.interfaces.DataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface  HistoricEventsDao : SeedableDao<HistoricEvent>{
+interface  HistoricEventsDao : DataSource<HistoricEvent>,SeedableDao<HistoricEvent>{
 
     @Insert
     suspend fun insertEvent (event: HistoricEvent): Long
@@ -23,5 +25,7 @@ interface  HistoricEventsDao : SeedableDao<HistoricEvent>{
     @Query("SELECT COUNT(*) FROM HistoricEvent")
     override suspend fun count(): Int
 
+    @Query("""SELECT * FROM HistoricEvent WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<HistoricEvent>
 
 }

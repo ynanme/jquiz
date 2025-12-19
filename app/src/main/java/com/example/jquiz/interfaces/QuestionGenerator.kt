@@ -1,9 +1,10 @@
 package com.example.jquiz.interfaces
 
+import androidx.room.Dao
 import com.example.jquiz.dto.Question
 import com.example.jquiz.dto.QuestionSpec
 
-interface QuestionGenerator {
+interface QuestionGenerator<T> {
 
-    fun generate(spec : QuestionSpec) : Question
+    suspend fun  generate(spec : QuestionSpec, dao: DataSource<T>) : Question?
 }

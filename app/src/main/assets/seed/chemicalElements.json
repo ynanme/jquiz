@@ -1,25 +1,702 @@
 [
-  { "id": 1,  "element": "Hydrogène", "atomicNumber": 1,  "atomicMass": 1,   "notoriety": 1 },
-  { "id": 2,  "element": "Hélium",    "atomicNumber": 2,  "atomicMass": 4,   "notoriety": 2 },
-  { "id": 3,  "element": "Lithium",   "atomicNumber": 3,  "atomicMass": 7,   "notoriety": 3 },
-  { "id": 4,  "element": "Béryllium", "atomicNumber": 4,  "atomicMass": 9,   "notoriety": 4 },
-  { "id": 5,  "element": "Bore",      "atomicNumber": 5,  "atomicMass": 11,  "notoriety": 4 },
-
-  { "id": 6,  "element": "Carbone",   "atomicNumber": 6,  "atomicMass": 12,  "notoriety": 1 },
-  { "id": 7,  "element": "Azote",     "atomicNumber": 7,  "atomicMass": 14,  "notoriety": 2 },
-  { "id": 8,  "element": "Oxygène",   "atomicNumber": 8,  "atomicMass": 16,  "notoriety": 1 },
-  { "id": 9,  "element": "Fluor",     "atomicNumber": 9,  "atomicMass": 19,  "notoriety": 3 },
-  { "id": 10, "element": "Néon",      "atomicNumber": 10, "atomicMass": 20,  "notoriety": 3 },
-
-  { "id": 11, "element": "Sodium",    "atomicNumber": 11, "atomicMass": 23,  "notoriety": 2 },
-  { "id": 12, "element": "Magnésium", "atomicNumber": 12, "atomicMass": 24,  "notoriety": 2 },
-  { "id": 13, "element": "Aluminium", "atomicNumber": 13, "atomicMass": 27,  "notoriety": 2 },
-  { "id": 14, "element": "Silicium",  "atomicNumber": 14, "atomicMass": 28,  "notoriety": 3 },
-  { "id": 15, "element": "Phosphore", "atomicNumber": 15, "atomicMass": 31,  "notoriety": 3 },
-
-  { "id": 16, "element": "Soufre",    "atomicNumber": 16, "atomicMass": 32,  "notoriety": 3 },
-  { "id": 17, "element": "Chlore",    "atomicNumber": 17, "atomicMass": 35,  "notoriety": 2 },
-  { "id": 18, "element": "Argon",     "atomicNumber": 18, "atomicMass": 40,  "notoriety": 4 },
-  { "id": 19, "element": "Potassium", "atomicNumber": 19, "atomicMass": 39,  "notoriety": 3 },
-  { "id": 20, "element": "Calcium",   "atomicNumber": 20, "atomicMass": 40,  "notoriety": 2 }
+  {
+    "id": 1,
+    "element": "Hydrogen",
+    "atomicNumber": 1,
+    "atomicMass": 1,
+    "notoriety": 1
+  },
+  {
+    "id": 2,
+    "element": "Helium",
+    "atomicNumber": 2,
+    "atomicMass": 4,
+    "notoriety": 1
+  },
+  {
+    "id": 3,
+    "element": "Lithium",
+    "atomicNumber": 3,
+    "atomicMass": 7,
+    "notoriety": 2
+  },
+  {
+    "id": 4,
+    "element": "Beryllium",
+    "atomicNumber": 4,
+    "atomicMass": 9,
+    "notoriety": 2
+  },
+  {
+    "id": 5,
+    "element": "Boron",
+    "atomicNumber": 5,
+    "atomicMass": 11,
+    "notoriety": 2
+  },
+  {
+    "id": 6,
+    "element": "Carbon",
+    "atomicNumber": 6,
+    "atomicMass": 12,
+    "notoriety": 1
+  },
+  {
+    "id": 7,
+    "element": "Nitrogen",
+    "atomicNumber": 7,
+    "atomicMass": 14,
+    "notoriety": 1
+  },
+  {
+    "id": 8,
+    "element": "Oxygen",
+    "atomicNumber": 8,
+    "atomicMass": 16,
+    "notoriety": 1
+  },
+  {
+    "id": 9,
+    "element": "Fluorine",
+    "atomicNumber": 9,
+    "atomicMass": 19,
+    "notoriety": 2
+  },
+  {
+    "id": 10,
+    "element": "Neon",
+    "atomicNumber": 10,
+    "atomicMass": 20,
+    "notoriety": 2
+  },
+  {
+    "id": 11,
+    "element": "Sodium",
+    "atomicNumber": 11,
+    "atomicMass": 23,
+    "notoriety": 1
+  },
+  {
+    "id": 12,
+    "element": "Magnesium",
+    "atomicNumber": 12,
+    "atomicMass": 24,
+    "notoriety": 1
+  },
+  {
+    "id": 13,
+    "element": "Aluminum",
+    "atomicNumber": 13,
+    "atomicMass": 27,
+    "notoriety": 1
+  },
+  {
+    "id": 14,
+    "element": "Silicon",
+    "atomicNumber": 14,
+    "atomicMass": 28,
+    "notoriety": 1
+  },
+  {
+    "id": 15,
+    "element": "Phosphorus",
+    "atomicNumber": 15,
+    "atomicMass": 31,
+    "notoriety": 1
+  },
+  {
+    "id": 16,
+    "element": "Sulfur",
+    "atomicNumber": 16,
+    "atomicMass": 32,
+    "notoriety": 1
+  },
+  {
+    "id": 17,
+    "element": "Chlorine",
+    "atomicNumber": 17,
+    "atomicMass": 35,
+    "notoriety": 1
+  },
+  {
+    "id": 18,
+    "element": "Argon",
+    "atomicNumber": 18,
+    "atomicMass": 40,
+    "notoriety": 2
+  },
+  {
+    "id": 19,
+    "element": "Potassium",
+    "atomicNumber": 19,
+    "atomicMass": 39,
+    "notoriety": 1
+  },
+  {
+    "id": 20,
+    "element": "Calcium",
+    "atomicNumber": 20,
+    "atomicMass": 40,
+    "notoriety": 1
+  },
+  {
+    "id": 21,
+    "element": "Scandium",
+    "atomicNumber": 21,
+    "atomicMass": 45,
+    "notoriety": 2
+  },
+  {
+    "id": 22,
+    "element": "Titanium",
+    "atomicNumber": 22,
+    "atomicMass": 48,
+    "notoriety": 2
+  },
+  {
+    "id": 23,
+    "element": "Vanadium",
+    "atomicNumber": 23,
+    "atomicMass": 51,
+    "notoriety": 2
+  },
+  {
+    "id": 24,
+    "element": "Chromium",
+    "atomicNumber": 24,
+    "atomicMass": 52,
+    "notoriety": 2
+  },
+  {
+    "id": 25,
+    "element": "Manganese",
+    "atomicNumber": 25,
+    "atomicMass": 55,
+    "notoriety": 2
+  },
+  {
+    "id": 26,
+    "element": "Iron",
+    "atomicNumber": 26,
+    "atomicMass": 56,
+    "notoriety": 1
+  },
+  {
+    "id": 27,
+    "element": "Cobalt",
+    "atomicNumber": 27,
+    "atomicMass": 59,
+    "notoriety": 2
+  },
+  {
+    "id": 28,
+    "element": "Nickel",
+    "atomicNumber": 28,
+    "atomicMass": 59,
+    "notoriety": 2
+  },
+  {
+    "id": 29,
+    "element": "Copper",
+    "atomicNumber": 29,
+    "atomicMass": 64,
+    "notoriety": 1
+  },
+  {
+    "id": 30,
+    "element": "Zinc",
+    "atomicNumber": 30,
+    "atomicMass": 65,
+    "notoriety": 1
+  },
+  {
+    "id": 31,
+    "element": "Gallium",
+    "atomicNumber": 31,
+    "atomicMass": 70,
+    "notoriety": 3
+  },
+  {
+    "id": 32,
+    "element": "Germanium",
+    "atomicNumber": 32,
+    "atomicMass": 73,
+    "notoriety": 3
+  },
+  {
+    "id": 33,
+    "element": "Arsenic",
+    "atomicNumber": 33,
+    "atomicMass": 75,
+    "notoriety": 3
+  },
+  {
+    "id": 34,
+    "element": "Selenium",
+    "atomicNumber": 34,
+    "atomicMass": 79,
+    "notoriety": 3
+  },
+  {
+    "id": 35,
+    "element": "Bromine",
+    "atomicNumber": 35,
+    "atomicMass": 80,
+    "notoriety": 3
+  },
+  {
+    "id": 36,
+    "element": "Krypton",
+    "atomicNumber": 36,
+    "atomicMass": 84,
+    "notoriety": 3
+  },
+  {
+    "id": 37,
+    "element": "Rubidium",
+    "atomicNumber": 37,
+    "atomicMass": 85,
+    "notoriety": 3
+  },
+  {
+    "id": 38,
+    "element": "Strontium",
+    "atomicNumber": 38,
+    "atomicMass": 88,
+    "notoriety": 3
+  },
+  {
+    "id": 39,
+    "element": "Yttrium",
+    "atomicNumber": 39,
+    "atomicMass": 89,
+    "notoriety": 3
+  },
+  {
+    "id": 40,
+    "element": "Zirconium",
+    "atomicNumber": 40,
+    "atomicMass": 91,
+    "notoriety": 3
+  },
+  {
+    "id": 41,
+    "element": "Niobium",
+    "atomicNumber": 41,
+    "atomicMass": 93,
+    "notoriety": 3
+  },
+  {
+    "id": 42,
+    "element": "Molybdenum",
+    "atomicNumber": 42,
+    "atomicMass": 96,
+    "notoriety": 3
+  },
+  {
+    "id": 43,
+    "element": "Technetium",
+    "atomicNumber": 43,
+    "atomicMass": 98,
+    "notoriety": 3
+  },
+  {
+    "id": 44,
+    "element": "Ruthenium",
+    "atomicNumber": 44,
+    "atomicMass": 101,
+    "notoriety": 3
+  },
+  {
+    "id": 45,
+    "element": "Rhodium",
+    "atomicNumber": 45,
+    "atomicMass": 103,
+    "notoriety": 3
+  },
+  {
+    "id": 46,
+    "element": "Palladium",
+    "atomicNumber": 46,
+    "atomicMass": 106,
+    "notoriety": 3
+  },
+  {
+    "id": 47,
+    "element": "Silver",
+    "atomicNumber": 47,
+    "atomicMass": 108,
+    "notoriety": 1
+  },
+  {
+    "id": 48,
+    "element": "Cadmium",
+    "atomicNumber": 48,
+    "atomicMass": 112,
+    "notoriety": 3
+  },
+  {
+    "id": 49,
+    "element": "Indium",
+    "atomicNumber": 49,
+    "atomicMass": 115,
+    "notoriety": 3
+  },
+  {
+    "id": 50,
+    "element": "Tin",
+    "atomicNumber": 50,
+    "atomicMass": 119,
+    "notoriety": 3
+  },
+  {
+    "id": 51,
+    "element": "Antimony",
+    "atomicNumber": 51,
+    "atomicMass": 122,
+    "notoriety": 3
+  },
+  {
+    "id": 52,
+    "element": "Tellurium",
+    "atomicNumber": 52,
+    "atomicMass": 128,
+    "notoriety": 3
+  },
+  {
+    "id": 53,
+    "element": "Iodine",
+    "atomicNumber": 53,
+    "atomicMass": 127,
+    "notoriety": 3
+  },
+  {
+    "id": 54,
+    "element": "Xenon",
+    "atomicNumber": 54,
+    "atomicMass": 131,
+    "notoriety": 3
+  },
+  {
+    "id": 55,
+    "element": "Cesium",
+    "atomicNumber": 55,
+    "atomicMass": 133,
+    "notoriety": 4
+  },
+  {
+    "id": 56,
+    "element": "Barium",
+    "atomicNumber": 56,
+    "atomicMass": 137,
+    "notoriety": 4
+  },
+  {
+    "id": 57,
+    "element": "Lanthanum",
+    "atomicNumber": 57,
+    "atomicMass": 139,
+    "notoriety": 4
+  },
+  {
+    "id": 58,
+    "element": "Cerium",
+    "atomicNumber": 58,
+    "atomicMass": 140,
+    "notoriety": 4
+  },
+  {
+    "id": 59,
+    "element": "Praseodymium",
+    "atomicNumber": 59,
+    "atomicMass": 141,
+    "notoriety": 4
+  },
+  {
+    "id": 60,
+    "element": "Neodymium",
+    "atomicNumber": 60,
+    "atomicMass": 144,
+    "notoriety": 4
+  },
+  {
+    "id": 61,
+    "element": "Promethium",
+    "atomicNumber": 61,
+    "atomicMass": 145,
+    "notoriety": 4
+  },
+  {
+    "id": 62,
+    "element": "Samarium",
+    "atomicNumber": 62,
+    "atomicMass": 150,
+    "notoriety": 4
+  },
+  {
+    "id": 63,
+    "element": "Europium",
+    "atomicNumber": 63,
+    "atomicMass": 152,
+    "notoriety": 4
+  },
+  {
+    "id": 64,
+    "element": "Gadolinium",
+    "atomicNumber": 64,
+    "atomicMass": 157,
+    "notoriety": 4
+  },
+  {
+    "id": 65,
+    "element": "Terbium",
+    "atomicNumber": 65,
+    "atomicMass": 159,
+    "notoriety": 4
+  },
+  {
+    "id": 66,
+    "element": "Dysprosium",
+    "atomicNumber": 66,
+    "atomicMass": 163,
+    "notoriety": 4
+  },
+  {
+    "id": 67,
+    "element": "Holmium",
+    "atomicNumber": 67,
+    "atomicMass": 165,
+    "notoriety": 4
+  },
+  {
+    "id": 68,
+    "element": "Erbium",
+    "atomicNumber": 68,
+    "atomicMass": 167,
+    "notoriety": 4
+  },
+  {
+    "id": 69,
+    "element": "Thulium",
+    "atomicNumber": 69,
+    "atomicMass": 169,
+    "notoriety": 4
+  },
+  {
+    "id": 70,
+    "element": "Ytterbium",
+    "atomicNumber": 70,
+    "atomicMass": 173,
+    "notoriety": 4
+  },
+  {
+    "id": 71,
+    "element": "Lutetium",
+    "atomicNumber": 71,
+    "atomicMass": 175,
+    "notoriety": 4
+  },
+  {
+    "id": 72,
+    "element": "Hafnium",
+    "atomicNumber": 72,
+    "atomicMass": 178,
+    "notoriety": 4
+  },
+  {
+    "id": 73,
+    "element": "Tantalum",
+    "atomicNumber": 73,
+    "atomicMass": 181,
+    "notoriety": 4
+  },
+  {
+    "id": 74,
+    "element": "Tungsten",
+    "atomicNumber": 74,
+    "atomicMass": 184,
+    "notoriety": 4
+  },
+  {
+    "id": 75,
+    "element": "Rhenium",
+    "atomicNumber": 75,
+    "atomicMass": 186,
+    "notoriety": 4
+  },
+  {
+    "id": 76,
+    "element": "Osmium",
+    "atomicNumber": 76,
+    "atomicMass": 190,
+    "notoriety": 4
+  },
+  {
+    "id": 77,
+    "element": "Iridium",
+    "atomicNumber": 77,
+    "atomicMass": 192,
+    "notoriety": 4
+  },
+  {
+    "id": 78,
+    "element": "Platinum",
+    "atomicNumber": 78,
+    "atomicMass": 195,
+    "notoriety": 4
+  },
+  {
+    "id": 79,
+    "element": "Gold",
+    "atomicNumber": 79,
+    "atomicMass": 197,
+    "notoriety": 1
+  },
+  {
+    "id": 80,
+    "element": "Mercury",
+    "atomicNumber": 80,
+    "atomicMass": 201,
+    "notoriety": 1
+  },
+  {
+    "id": 81,
+    "element": "Thallium",
+    "atomicNumber": 81,
+    "atomicMass": 204,
+    "notoriety": 4
+  },
+  {
+    "id": 82,
+    "element": "Lead",
+    "atomicNumber": 82,
+    "atomicMass": 207,
+    "notoriety": 1
+  },
+  {
+    "id": 83,
+    "element": "Bismuth",
+    "atomicNumber": 83,
+    "atomicMass": 209,
+    "notoriety": 4
+  },
+  {
+    "id": 84,
+    "element": "Polonium",
+    "atomicNumber": 84,
+    "atomicMass": 209,
+    "notoriety": 4
+  },
+  {
+    "id": 85,
+    "element": "Astatine",
+    "atomicNumber": 85,
+    "atomicMass": 210,
+    "notoriety": 4
+  },
+  {
+    "id": 86,
+    "element": "Radon",
+    "atomicNumber": 86,
+    "atomicMass": 222,
+    "notoriety": 4
+  },
+  {
+    "id": 87,
+    "element": "Francium",
+    "atomicNumber": 87,
+    "atomicMass": 223,
+    "notoriety": 5
+  },
+  {
+    "id": 88,
+    "element": "Radium",
+    "atomicNumber": 88,
+    "atomicMass": 226,
+    "notoriety": 5
+  },
+  {
+    "id": 89,
+    "element": "Actinium",
+    "atomicNumber": 89,
+    "atomicMass": 227,
+    "notoriety": 5
+  },
+  {
+    "id": 90,
+    "element": "Thorium",
+    "atomicNumber": 90,
+    "atomicMass": 232,
+    "notoriety": 5
+  },
+  {
+    "id": 91,
+    "element": "Protactinium",
+    "atomicNumber": 91,
+    "atomicMass": 231,
+    "notoriety": 5
+  },
+  {
+    "id": 92,
+    "element": "Uranium",
+    "atomicNumber": 92,
+    "atomicMass": 238,
+    "notoriety": 1
+  },
+  {
+    "id": 93,
+    "element": "Neptunium",
+    "atomicNumber": 93,
+    "atomicMass": 237,
+    "notoriety": 5
+  },
+  {
+    "id": 94,
+    "element": "Plutonium",
+    "atomicNumber": 94,
+    "atomicMass": 244,
+    "notoriety": 5
+  },
+  {
+    "id": 95,
+    "element": "Americium",
+    "atomicNumber": 95,
+    "atomicMass": 243,
+    "notoriety": 5
+  },
+  {
+    "id": 96,
+    "element": "Curium",
+    "atomicNumber": 96,
+    "atomicMass": 247,
+    "notoriety": 5
+  },
+  {
+    "id": 97,
+    "element": "Berkelium",
+    "atomicNumber": 97,
+    "atomicMass": 247,
+    "notoriety": 5
+  },
+  {
+    "id": 98,
+    "element": "Californium",
+    "atomicNumber": 98,
+    "atomicMass": 251,
+    "notoriety": 5
+  },
+  {
+    "id": 99,
+    "element": "Einsteinium",
+    "atomicNumber": 99,
+    "atomicMass": 252,
+    "notoriety": 5
+  },
+  {
+    "id": 100,
+    "element": "Fermium",
+    "atomicNumber": 100,
+    "atomicMass": 257,
+    "notoriety": 5
+  }
 ]

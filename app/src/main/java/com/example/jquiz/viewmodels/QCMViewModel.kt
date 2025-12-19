@@ -12,7 +12,6 @@ import com.example.jquiz.dto.QuizResult
 
 class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty): QuizViewModel(application, domains, level) {
 
-    private val questionsCount = 5
     private val questions = listOf(
         QCM("Real Madrid C1s ?", "14", listOf("5", "0", "14", "3")),
         QCM("Oxygen atomic number ?", "8", listOf("6", "9", "7", "8")),
@@ -22,10 +21,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
     )
 
     private var currentQuestionIndex = mutableIntStateOf(0)
-    private var qcmIsOver = mutableStateOf(false)
     private var givenAnswer = mutableStateOf("")
-
-    private var correctAnswersCount = 0
 
     fun getCurrentQuestion (): QCM {
         return questions[currentQuestionIndex.intValue]
@@ -44,19 +40,16 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         if (currentQuestionIndex.intValue < questions.size-1) {
             currentQuestionIndex.intValue += 1
             givenAnswer.value = ""
-        } else qcmIsOver.value = true
+        } else quizIsOver.value = true
     }
 
-    fun qcmIsOver (): Boolean {
-        return qcmIsOver.value
-    }
 
     fun getQCMResult(): QuizResult {
         return QuizResult(correctAnswersCount, questionsCount, QuestionKind.QCM, level, domains)
     }
 
-    fun reset () {
-        qcmIsOver.value = false
+    override fun reset () {
+        quizIsOver.value = false
         currentQuestionIndex.intValue = 0
         givenAnswer.value = ""
         correctAnswersCount = 0

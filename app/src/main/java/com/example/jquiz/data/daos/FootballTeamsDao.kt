@@ -6,10 +6,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jquiz.data.models.FootballTeam
 import com.example.jquiz.data.daos.SeedableDao
+import com.example.jquiz.data.models.Country
+import com.example.jquiz.interfaces.DataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface  FootballTeamsDao : SeedableDao<FootballTeam>{
+interface  FootballTeamsDao : DataSource<FootballTeam>,SeedableDao<FootballTeam>{
 
     @Insert
     suspend fun insertTeam (team: FootballTeam): Long
@@ -23,5 +25,7 @@ interface  FootballTeamsDao : SeedableDao<FootballTeam>{
     @Query("SELECT COUNT(*) FROM FootballTeam")
     override suspend fun count(): Int
 
+    @Query("""SELECT * FROM FootballTeam WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<FootballTeam>
 
 }

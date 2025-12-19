@@ -6,10 +6,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jquiz.data.models.Country
 import com.example.jquiz.data.daos.SeedableDao
+import com.example.jquiz.interfaces.DataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface  CountriesDao : SeedableDao<Country>{
+interface  CountriesDao : DataSource<Country>, SeedableDao<Country> {
 
     @Insert
     suspend fun insertCountry (country: Country): Long
@@ -23,5 +24,6 @@ interface  CountriesDao : SeedableDao<Country>{
     @Query("SELECT COUNT(*) FROM Country")
     override suspend fun count(): Int
 
-
+    @Query("""SELECT * FROM Country WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<Country>
 }

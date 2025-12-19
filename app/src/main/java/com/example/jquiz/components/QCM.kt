@@ -19,23 +19,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.jquiz.dto.QCM
+import com.example.jquiz.viewmodels.PrecisionViewModel
 import com.example.jquiz.viewmodels.QCMViewModel
 
 
 @Composable
 fun QCM(model: QCMViewModel, onQuit: () -> Unit) {
 
-    if (!model.qcmIsOver()) {
-        QuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) { model.goToNextQuestion() }
+    if (!model.isQuizOver()) {
+        QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) { model.goToNextQuestion() }
     } else {
         QuizRecapBox(model.getQCMResult(), { model.reset() }, onQuit)
     }
 
 }
 
-
 @Composable
-fun QuestionBox (
+fun QCMQuestionBox (
     question: QCM,
     chosen: String,
     choose: (String) -> Unit,

@@ -16,6 +16,7 @@
 /.idea/deploymentTargetSelector.xml
 .idea/deviceManager.xml
 .idea/inspectionProfiles/Project_Default.xml
+.idea/studiobot.xml
 
 # === Kotlin internal ===
 .kotlin/

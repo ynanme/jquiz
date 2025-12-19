@@ -1,37 +1,602 @@
 [
-  { "id": 1,  "event": "Chute de l’Empire romain d’Occident", "date": 476,  "notoriety": 1 },
-  { "id": 2,  "event": "Découverte de l’Amérique par Christophe Colomb", "date": 1492, "notoriety": 1 },
-  { "id": 3,  "event": "Révolution française", "date": 1789, "notoriety": 1 },
-  { "id": 4,  "event": "Indépendance des États-Unis", "date": 1776, "notoriety": 1 },
-  { "id": 5,  "event": "Première Guerre mondiale", "date": 1914, "notoriety": 1 },
-
-  { "id": 6,  "event": "Seconde Guerre mondiale", "date": 1939, "notoriety": 1 },
-  { "id": 7,  "event": "Chute du mur de Berlin", "date": 1989, "notoriety": 1 },
-  { "id": 8,  "event": "Révolution industrielle", "date": 1760, "notoriety": 2 },
-  { "id": 9,  "event": "Fondation de l’ONU", "date": 1945, "notoriety": 2 },
-  { "id": 10, "event": "Début de la guerre froide", "date": 1947, "notoriety": 2 },
-
-  { "id": 11, "event": "Prise de Constantinople par les Ottomans", "date": 1453, "notoriety": 2 },
-  { "id": 12, "event": "Renaissance européenne", "date": 1400, "notoriety": 2 },
-  { "id": 13, "event": "Indépendance de l’Algérie", "date": 1962, "notoriety": 2 },
-  { "id": 14, "event": "Traité de Versailles", "date": 1919, "notoriety": 2 },
-  { "id": 15, "event": "Réforme protestante", "date": 1517, "notoriety": 2 },
-
-  { "id": 16, "event": "Guerres napoléoniennes", "date": 1803, "notoriety": 3 },
-  { "id": 17, "event": "Unification de l’Allemagne", "date": 1871, "notoriety": 3 },
-  { "id": 18, "event": "Unification de l’Italie", "date": 1861, "notoriety": 3 },
-  { "id": 19, "event": "Révolution russe", "date": 1917, "notoriety": 3 },
-  { "id": 20, "event": "Guerre du Vietnam", "date": 1955, "notoriety": 3 },
-
-  { "id": 21, "event": "Fondation de l’Empire ottoman", "date": 1299, "notoriety": 4 },
-  { "id": 22, "event": "Guerre de Cent Ans", "date": 1337, "notoriety": 4 },
-  { "id": 23, "event": "Concile de Trente", "date": 1545, "notoriety": 4 },
-  { "id": 24, "event": "Traité de Tordesillas", "date": 1494, "notoriety": 4 },
-  { "id": 25, "event": "Révolutions de 1848", "date": 1848, "notoriety": 4 },
-
-  { "id": 26, "event": "Paix de Westphalie", "date": 1648, "notoriety": 5 },
-  { "id": 27, "event": "Guerres puniques", "date": -264, "notoriety": 5 },
-  { "id": 28, "event": "Fondation de la Ligue hanséatique", "date": 1150, "notoriety": 5 },
-  { "id": 29, "event": "Révolte des Taiping", "date": 1850, "notoriety": 5 },
-  { "id": 30, "event": "Bataille de Manzikert", "date": 1071, "notoriety": 5 }
+  {
+    "id": 1,
+    "event": "Construction of the Great Pyramid of Giza (approx.)",
+    "date": -2560,
+    "notoriety": 5
+  },
+  {
+    "id": 2,
+    "event": "Founding of Rome (traditional date)",
+    "date": -753,
+    "notoriety": 4
+  },
+  {
+    "id": 3,
+    "event": "Battle of Marathon",
+    "date": -490,
+    "notoriety": 4
+  },
+  {
+    "id": 4,
+    "event": "Death of Alexander the Great",
+    "date": -323,
+    "notoriety": 4
+  },
+  {
+    "id": 5,
+    "event": "Julius Caesar assassinated",
+    "date": -44,
+    "notoriety": 3
+  },
+  {
+    "id": 6,
+    "event": "Birth of Jesus (approx.)",
+    "date": 1,
+    "notoriety": 2
+  },
+  {
+    "id": 7,
+    "event": "Fall of the Western Roman Empire",
+    "date": 476,
+    "notoriety": 3
+  },
+  {
+    "id": 8,
+    "event": "Prophet Muhammad's Hijra",
+    "date": 622,
+    "notoriety": 3
+  },
+  {
+    "id": 9,
+    "event": "Battle of Hastings",
+    "date": 1066,
+    "notoriety": 3
+  },
+  {
+    "id": 10,
+    "event": "Magna Carta sealed",
+    "date": 1215,
+    "notoriety": 3
+  },
+  {
+    "id": 11,
+    "event": "Black Death reaches Europe",
+    "date": 1347,
+    "notoriety": 3
+  },
+  {
+    "id": 12,
+    "event": "Fall of Constantinople",
+    "date": 1453,
+    "notoriety": 3
+  },
+  {
+    "id": 13,
+    "event": "Gutenberg Bible printed (approx.)",
+    "date": 1455,
+    "notoriety": 4
+  },
+  {
+    "id": 14,
+    "event": "Columbus reaches the Americas",
+    "date": 1492,
+    "notoriety": 2
+  },
+  {
+    "id": 15,
+    "event": "Martin Luther's 95 Theses",
+    "date": 1517,
+    "notoriety": 3
+  },
+  {
+    "id": 16,
+    "event": "Defeat of the Spanish Armada",
+    "date": 1588,
+    "notoriety": 3
+  },
+  {
+    "id": 17,
+    "event": "Galileo's trial",
+    "date": 1633,
+    "notoriety": 4
+  },
+  {
+    "id": 18,
+    "event": "English Civil War begins",
+    "date": 1642,
+    "notoriety": 4
+  },
+  {
+    "id": 19,
+    "event": "Newton publishes Principia",
+    "date": 1687,
+    "notoriety": 4
+  },
+  {
+    "id": 20,
+    "event": "Glorious Revolution",
+    "date": 1688,
+    "notoriety": 4
+  },
+  {
+    "id": 21,
+    "event": "American Declaration of Independence",
+    "date": 1776,
+    "notoriety": 2
+  },
+  {
+    "id": 22,
+    "event": "French Revolution begins",
+    "date": 1789,
+    "notoriety": 2
+  },
+  {
+    "id": 23,
+    "event": "First Steam Locomotive (early rail era)",
+    "date": 1804,
+    "notoriety": 4
+  },
+  {
+    "id": 24,
+    "event": "Battle of Waterloo",
+    "date": 1815,
+    "notoriety": 3
+  },
+  {
+    "id": 25,
+    "event": "Abolition of slavery in the British Empire",
+    "date": 1833,
+    "notoriety": 4
+  },
+  {
+    "id": 26,
+    "event": "American Civil War begins",
+    "date": 1861,
+    "notoriety": 3
+  },
+  {
+    "id": 27,
+    "event": "Unification of Germany",
+    "date": 1871,
+    "notoriety": 3
+  },
+  {
+    "id": 28,
+    "event": "First modern Olympic Games",
+    "date": 1896,
+    "notoriety": 3
+  },
+  {
+    "id": 29,
+    "event": "Wright brothers' first powered flight",
+    "date": 1903,
+    "notoriety": 2
+  },
+  {
+    "id": 30,
+    "event": "World War I begins",
+    "date": 1914,
+    "notoriety": 2
+  },
+  {
+    "id": 31,
+    "event": "Russian Revolution",
+    "date": 1917,
+    "notoriety": 2
+  },
+  {
+    "id": 32,
+    "event": "Treaty of Versailles",
+    "date": 1919,
+    "notoriety": 3
+  },
+  {
+    "id": 33,
+    "event": "Discovery of penicillin",
+    "date": 1928,
+    "notoriety": 2
+  },
+  {
+    "id": 34,
+    "event": "Great Depression begins (Wall Street crash)",
+    "date": 1929,
+    "notoriety": 2
+  },
+  {
+    "id": 35,
+    "event": "World War II begins",
+    "date": 1939,
+    "notoriety": 2
+  },
+  {
+    "id": 36,
+    "event": "United Nations founded",
+    "date": 1945,
+    "notoriety": 2
+  },
+  {
+    "id": 37,
+    "event": "India gains independence",
+    "date": 1947,
+    "notoriety": 2
+  },
+  {
+    "id": 38,
+    "event": "Universal Declaration of Human Rights",
+    "date": 1948,
+    "notoriety": 3
+  },
+  {
+    "id": 39,
+    "event": "People's Republic of China founded",
+    "date": 1949,
+    "notoriety": 2
+  },
+  {
+    "id": 40,
+    "event": "Korean War begins",
+    "date": 1950,
+    "notoriety": 3
+  },
+  {
+    "id": 41,
+    "event": "DNA double helix described",
+    "date": 1953,
+    "notoriety": 2
+  },
+  {
+    "id": 42,
+    "event": "First human in space (Yuri Gagarin)",
+    "date": 1961,
+    "notoriety": 2
+  },
+  {
+    "id": 43,
+    "event": "Cuban Missile Crisis",
+    "date": 1962,
+    "notoriety": 2
+  },
+  {
+    "id": 44,
+    "event": "Civil Rights Act (U.S.)",
+    "date": 1964,
+    "notoriety": 3
+  },
+  {
+    "id": 45,
+    "event": "Apollo 11 Moon landing",
+    "date": 1969,
+    "notoriety": 1
+  },
+  {
+    "id": 46,
+    "event": "Fall of Saigon",
+    "date": 1975,
+    "notoriety": 3
+  },
+  {
+    "id": 47,
+    "event": "First personal computer era (Apple II)",
+    "date": 1977,
+    "notoriety": 4
+  },
+  {
+    "id": 48,
+    "event": "Iranian Revolution",
+    "date": 1979,
+    "notoriety": 3
+  },
+  {
+    "id": 49,
+    "event": "Berlin Wall falls",
+    "date": 1989,
+    "notoriety": 1
+  },
+  {
+    "id": 50,
+    "event": "Soviet Union dissolves",
+    "date": 1991,
+    "notoriety": 2
+  },
+  {
+    "id": 51,
+    "event": "Rwandan genocide begins",
+    "date": 1994,
+    "notoriety": 4
+  },
+  {
+    "id": 52,
+    "event": "Euro currency introduced (non-cash)",
+    "date": 1999,
+    "notoriety": 3
+  },
+  {
+    "id": 53,
+    "event": "9/11 attacks",
+    "date": 2001,
+    "notoriety": 2
+  },
+  {
+    "id": 54,
+    "event": "Human Genome Project completed",
+    "date": 2003,
+    "notoriety": 3
+  },
+  {
+    "id": 55,
+    "event": "Global financial crisis",
+    "date": 2008,
+    "notoriety": 2
+  },
+  {
+    "id": 56,
+    "event": "Arab Spring begins",
+    "date": 2010,
+    "notoriety": 3
+  },
+  {
+    "id": 57,
+    "event": "Brexit referendum",
+    "date": 2016,
+    "notoriety": 3
+  },
+  {
+    "id": 58,
+    "event": "COVID-19 declared a pandemic (WHO)",
+    "date": 2020,
+    "notoriety": 1
+  },
+  {
+    "id": 59,
+    "event": "Battle of Thermopylae",
+    "date": -480,
+    "notoriety": 4
+  },
+  {
+    "id": 60,
+    "event": "First Qin Emperor unifies China",
+    "date": -221,
+    "notoriety": 4
+  },
+  {
+    "id": 61,
+    "event": "Edict of Milan",
+    "date": 313,
+    "notoriety": 4
+  },
+  {
+    "id": 62,
+    "event": "Crusaders capture Jerusalem (First Crusade)",
+    "date": 1099,
+    "notoriety": 4
+  },
+  {
+    "id": 63,
+    "event": "Mongol Empire founded (approx.)",
+    "date": 1206,
+    "notoriety": 4
+  },
+  {
+    "id": 64,
+    "event": "Hundred Years' War begins",
+    "date": 1337,
+    "notoriety": 4
+  },
+  {
+    "id": 65,
+    "event": "Leonardo da Vinci paints the Mona Lisa (approx.)",
+    "date": 1503,
+    "notoriety": 4
+  },
+  {
+    "id": 66,
+    "event": "Copernicus publishes heliocentrism",
+    "date": 1543,
+    "notoriety": 4
+  },
+  {
+    "id": 67,
+    "event": "Thirty Years' War begins",
+    "date": 1618,
+    "notoriety": 4
+  },
+  {
+    "id": 68,
+    "event": "First successful smallpox vaccination",
+    "date": 1796,
+    "notoriety": 4
+  },
+  {
+    "id": 69,
+    "event": "Telegraph demonstrated (Morse)",
+    "date": 1837,
+    "notoriety": 4
+  },
+  {
+    "id": 70,
+    "event": "Publication of 'On the Origin of Species'",
+    "date": 1859,
+    "notoriety": 3
+  },
+  {
+    "id": 71,
+    "event": "Telephone patented (Bell)",
+    "date": 1876,
+    "notoriety": 3
+  },
+  {
+    "id": 72,
+    "event": "First Nobel Prizes awarded",
+    "date": 1901,
+    "notoriety": 4
+  },
+  {
+    "id": 73,
+    "event": "Titanic sinks",
+    "date": 1912,
+    "notoriety": 2
+  },
+  {
+    "id": 74,
+    "event": "Spanish flu pandemic peaks",
+    "date": 1918,
+    "notoriety": 3
+  },
+  {
+    "id": 75,
+    "event": "Women gain the right to vote in the U.S.",
+    "date": 1920,
+    "notoriety": 4
+  },
+  {
+    "id": 76,
+    "event": "First transatlantic flight (Lindbergh)",
+    "date": 1927,
+    "notoriety": 3
+  },
+  {
+    "id": 77,
+    "event": "First nuclear weapon test (Trinity)",
+    "date": 1945,
+    "notoriety": 3
+  },
+  {
+    "id": 78,
+    "event": "Israel declares independence",
+    "date": 1948,
+    "notoriety": 3
+  },
+  {
+    "id": 79,
+    "event": "Suez Crisis",
+    "date": 1956,
+    "notoriety": 4
+  },
+  {
+    "id": 80,
+    "event": "First heart transplant",
+    "date": 1967,
+    "notoriety": 4
+  },
+  {
+    "id": 81,
+    "event": "Vietnam War ends",
+    "date": 1975,
+    "notoriety": 3
+  },
+  {
+    "id": 82,
+    "event": "Iran–Iraq War begins",
+    "date": 1980,
+    "notoriety": 4
+  },
+  {
+    "id": 83,
+    "event": "Chernobyl disaster",
+    "date": 1986,
+    "notoriety": 2
+  },
+  {
+    "id": 84,
+    "event": "Nelson Mandela released from prison",
+    "date": 1990,
+    "notoriety": 3
+  },
+  {
+    "id": 85,
+    "event": "End of apartheid (South Africa elections)",
+    "date": 1994,
+    "notoriety": 3
+  },
+  {
+    "id": 86,
+    "event": "Google founded",
+    "date": 1998,
+    "notoriety": 4
+  },
+  {
+    "id": 87,
+    "event": "iPhone announced",
+    "date": 2007,
+    "notoriety": 3
+  },
+  {
+    "id": 88,
+    "event": "First image of a black hole",
+    "date": 2019,
+    "notoriety": 3
+  },
+  {
+    "id": 89,
+    "event": "James Webb Space Telescope first images",
+    "date": 2022,
+    "notoriety": 3
+  },
+  {
+    "id": 90,
+    "event": "Large Hadron Collider first high-energy collisions",
+    "date": 2009,
+    "notoriety": 4
+  },
+  {
+    "id": 91,
+    "event": "First powered flight of a helicopter (early milestone)",
+    "date": 1939,
+    "notoriety": 5
+  },
+  {
+    "id": 92,
+    "event": "Discovery of the structure of benzene (Kekule era)",
+    "date": 1865,
+    "notoriety": 5
+  },
+  {
+    "id": 93,
+    "event": "Printing press spreads in Europe (approx.)",
+    "date": 1470,
+    "notoriety": 5
+  },
+  {
+    "id": 94,
+    "event": "Portuguese reach India by sea (Vasco da Gama)",
+    "date": 1498,
+    "notoriety": 3
+  },
+  {
+    "id": 95,
+    "event": "First circumnavigation completed (Magellan–Elcano)",
+    "date": 1522,
+    "notoriety": 4
+  },
+  {
+    "id": 96,
+    "event": "English Bill of Rights",
+    "date": 1689,
+    "notoriety": 4
+  },
+  {
+    "id": 97,
+    "event": "First successful electric light bulb (Edison era)",
+    "date": 1879,
+    "notoriety": 3
+  },
+  {
+    "id": 98,
+    "event": "First radio transmission (Marconi era)",
+    "date": 1895,
+    "notoriety": 4
+  },
+  {
+    "id": 99,
+    "event": "Discovery of X-rays (Rontgen)",
+    "date": 1895,
+    "notoriety": 3
+  },
+  {
+    "id": 100,
+    "event": "World Wide Web proposed (Berners-Lee)",
+    "date": 1989,
+    "notoriety": 2
+  }
 ]
