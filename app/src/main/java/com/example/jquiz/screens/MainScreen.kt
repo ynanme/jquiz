@@ -1,5 +1,6 @@
 package com.example.jquiz.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,17 +22,30 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.jquiz.interfaces.Screen
+import com.example.jquiz.services.VipService
+import com.example.jquiz.viewmodels.SettingsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun MainScreen () {
+
+    val context = LocalContext.current
+
+    val vipService = androidx.compose.runtime.remember {
+        VipService(context)
+    }
+    val settingsVm = androidx.compose.runtime.remember {
+        SettingsViewModel(vipService)
+    }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -39,7 +53,7 @@ fun MainScreen () {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = { ModalDrawerSheet { DrawerContent() } }
+        drawerContent = { ModalDrawerSheet { DrawerContent(backStack, { scopeLauncher(drawerState, scope) }) } }
     ) {
         Scaffold (
             topBar = { TopBar("${backStack.last()}") { scopeLauncher(drawerState, scope) } },
@@ -52,6 +66,7 @@ fun MainScreen () {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
                     entry<Screen.History> { HistoryScreen() }
+                    entry<Screen.Settings> {SettingsScreen(settingsVm) }
                 }
             )
         }
@@ -60,11 +75,15 @@ fun MainScreen () {
 }
 
 
+
 @Composable
-fun DrawerContent () {
+fun DrawerContent(backStack: NavBackStack<NavKey>, closeDrawerState : () -> Unit) {
     Column {
         NavigationDrawerItem(selected = false, label = { Text("Account") }, onClick = {})
-        NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
+        NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {
+            backStack+=Screen.Settings
+            closeDrawerState()
+        })
         NavigationDrawerItem(selected = false, label = { Text("Notifications") }, onClick = {})
         NavigationDrawerItem(selected = false, label = { Text("About") }, onClick = {})
 
@@ -89,7 +108,12 @@ fun BottomBar (backStack: NavBackStack<NavKey>, screens: List<Screen>) {
         screens.forEach {
             NavigationBarItem(
                 selected = it==current,
-                onClick = { backStack += it },
+                onClick = {
+                    if(it != current) {
+                        backStack -= current
+                        backStack += it
+                    }
+                },
                 icon = { Icon(it.icon, "$it") }
             )
         }
