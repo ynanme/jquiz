@@ -53,6 +53,7 @@ fun MainScreen () {
                     entry<Screen.Learning> { LearningScreen() }
                     entry<Screen.History> { HistoryScreen() }
                     entry<Screen.Account> { AccountScreen() }
+                    entry<Screen.Notifications> { NotificationsScreen() }
                 }
             )
         }
@@ -70,7 +71,11 @@ fun DrawerContent (backStack: NavBackStack<NavKey>, drawerState: DrawerState, sc
             onClick = { scope.launch { drawerState.close(); backStack += Screen.Account } }
         )
         NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
-        NavigationDrawerItem(selected = false, label = { Text("Notifications") }, onClick = {})
+        NavigationDrawerItem(
+            selected = false,
+            label = { Text("Notifications") },
+            onClick = { scope.launch { drawerState.close(); backStack += Screen.Notifications } }
+        )
         NavigationDrawerItem(selected = false, label = { Text("About") }, onClick = {})
 
     }

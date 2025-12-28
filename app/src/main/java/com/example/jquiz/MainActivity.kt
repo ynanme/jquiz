@@ -13,11 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.jquiz.screens.MainScreen
+import com.example.jquiz.services.createChannel
 import com.example.jquiz.ui.theme.JQuizTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        createChannel(this)
         enableEdgeToEdge()
         setContent {
             JQuizTheme {

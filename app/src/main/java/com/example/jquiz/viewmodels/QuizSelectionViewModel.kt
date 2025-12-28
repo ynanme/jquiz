@@ -1,12 +1,9 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
@@ -26,7 +23,7 @@ enum class Step {
 
 class QuizSelectionViewModel (application: Application): AndroidViewModel(application) {
 
-    private val accountManager = AccountManager(application.dataStore)
+    private val accountManager = AccountManager(application.accountDatastore)
 
     val canQuiz = mutableStateOf(true)
     val remainingTime = mutableLongStateOf(0L)
