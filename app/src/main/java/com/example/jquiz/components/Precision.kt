@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.jquiz.data.models.GameQuestions
 import com.example.jquiz.dto.PrecisionQuestion
 import com.example.jquiz.viewmodels.PrecisionViewModel
 
@@ -28,6 +29,7 @@ fun Precision(vm: PrecisionViewModel, onQuit: () -> Unit) {
         vm.generateQuestion()
     }
     if (over) {
+        vm.updateGame(true)
         QuizRecapBox(vm.getPrecisionResult(), { vm.reset() }, onQuit)
     }
     else {
@@ -57,6 +59,7 @@ fun PrecisionQuestionBox(question : PrecisionQuestion, vm: PrecisionViewModel) {
         )
         Button(onClick = {
             vm.evaluateAnswer(userAnswer)
+            vm.saveQuestion(userAnswer, )
             userAnswer = ""
             vm.generateQuestion()
         }) {Text("Submit")}

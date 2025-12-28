@@ -8,21 +8,15 @@ import androidx.room.PrimaryKey
     ForeignKey(entity = Game::class,
     parentColumns = ["id"],
     childColumns = ["gameId"],
-    onDelete = ForeignKey.CASCADE),
-
-        ForeignKey(entity = QuestionType::class,
-            parentColumns = ["id"],
-            childColumns = ["typeQuestionId"],
-            onDelete = ForeignKey.CASCADE)
+    onDelete = ForeignKey.CASCADE)
 ])
 data class GameQuestions (
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0,
-    val dataId : Int,
-    val totalDifficulty : Int,
-    val score : Int,
-    val field : String,
-    val attribute : String,
     val gameId : Int,
-    val typeQuestionId : Int
+    val question : String,
+    val questionData : String,
+    val correctAnswer : String,
+    val userAnswer : String,
+    val isCorrect : Boolean,
 )

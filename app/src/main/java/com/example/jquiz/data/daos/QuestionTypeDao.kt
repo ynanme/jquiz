@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.jquiz.data.models.QuestionType
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface QuestionTypeDao : SeedableDao<QuestionType> {
@@ -13,7 +14,7 @@ interface QuestionTypeDao : SeedableDao<QuestionType> {
     suspend fun addQuestionType(qt : QuestionType)
 
     @Query("SELECT * FROM QuestionType")
-    suspend fun loadAllQuestionType() : List<QuestionType>
+    fun loadAllQuestionType() : Flow<List<QuestionType>>
 
 
     @Query("SELECT COUNT(*) FROM QuestionType")

@@ -1,6 +1,7 @@
 package com.example.jquiz.screens
 
 import android.annotation.SuppressLint
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -30,6 +31,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.jquiz.interfaces.Screen
 import com.example.jquiz.services.VipService
+import com.example.jquiz.viewmodels.HistoryViewModel
 import com.example.jquiz.viewmodels.SettingsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -45,6 +47,10 @@ fun MainScreen () {
     }
     val settingsVm = androidx.compose.runtime.remember {
         SettingsViewModel(vipService)
+    }
+
+    val historyVm = androidx.compose.runtime.remember {
+        HistoryViewModel(context.applicationContext as Application)
     }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -65,7 +71,7 @@ fun MainScreen () {
                 entryProvider = entryProvider {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
-                    entry<Screen.History> { HistoryScreen() }
+                    entry<Screen.History> { HistoryScreen(historyVm) }
                     entry<Screen.Settings> {SettingsScreen(settingsVm) }
                 }
             )
@@ -109,9 +115,12 @@ fun BottomBar (backStack: NavBackStack<NavKey>, screens: List<Screen>) {
             NavigationBarItem(
                 selected = it==current,
                 onClick = {
-                    if(it != current) {
-                        backStack -= current
-                        backStack += it
+                    if(current !in listOf(Screen.Quiz, Screen.Learning, Screen.History)) {
+                        backStack+=it
+                    }
+                    else if(it != current) {
+                        backStack.remove(current)
+                        backStack+=it
                     }
                 },
                 icon = { Icon(it.icon, "$it") }

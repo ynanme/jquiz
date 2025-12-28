@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.example.jquiz.data.models.GameQuestions
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GameQuestionsDao {
@@ -12,12 +13,16 @@ interface GameQuestionsDao {
     @Insert
     suspend fun AddGameQuestion(gameQuestion : GameQuestions)
 
-    @Query("SELECT * FROM GameQuestions WHERE Id = id")
+    @Query("SELECT * FROM GameQuestions WHERE Id = :id")
     suspend fun GetGameQuestionById(id : Int)
 
     @Query("SELECT * FROM GameQuestions")
-    suspend fun LoadAllGameQuestions();
+    fun LoadAllGameQuestions() : Flow<List<GameQuestions>>
 
     @Delete
     suspend fun Delete(id : Int);
+
+    @Query("SELECT * FROM GameQuestions WHERE gameId = :gameId")
+    fun LoadGameQuestionsByGameId(gameId : Int) : Flow<List<GameQuestions>>
+
 }

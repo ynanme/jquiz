@@ -5,24 +5,31 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.Knowledge
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
-import com.example.jquiz.interfaces.DataSource
+import com.example.jquiz.data.enums.QuestionKind
+import com.example.jquiz.data.models.Game
+import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 abstract class QuizViewModel (application: Application, protected val domains: List<Fields>, protected val level: Difficulty): AndroidViewModel(application) {
 
     protected val db = Knowledge.getDB(application)
-
     protected val chemicalElementsDao = db.chemicalElementsDao()
     protected val countriesDao = db.countriesDao()
     protected val footballTeamsDao = db.footballTeamsDao()
     protected val historicEventsDao = db.historicEventsDao()
     protected val planetsDao = db.planetsDao()
+    protected val gameDao = db.gameDao()
+    protected val gameQuestionsDao = db.gameQuestionsDao()
+
 
     public var quizIsOver = mutableStateOf(false)
-
+    protected lateinit var game: Game
     protected var correctAnswersCount = 0
 
     protected val questionsCount = 5
@@ -31,6 +38,30 @@ abstract class QuizViewModel (application: Application, protected val domains: L
 
     fun isQuizOver (): Boolean {
         return quizIsOver.value
+    }
+
+     fun updateGame(endedGame: Boolean = true){
+        game.finalScore = (correctAnswersCount / questionsCount) * 100
+        game.endedGame = endedGame
+        viewModelScope.launch {
+            gameDao.update(game)
+        }
+    }
+
+    abstract fun getQuestionKind() : QuestionKind
+
+
+    fun launchGame() {
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
+        val current = LocalDateTime.now().format(formatter)
+        game = Game(finalScore = 0, date = current, difficulty = level.value, endedGame = false, type = getQuestionKind())
+        viewModelScope.launch {
+            gameDao.AddGame(game)
+        }
+    }
+
+    init{
+        launchGame()
     }
 }
 

@@ -70,4 +70,8 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         evaluations = mutableStateMapOf<String, Boolean?>(sortedItems[0]!!.label to true)
     }
 
+    override fun getQuestionKind(): QuestionKind {
+        return QuestionKind.DYNAMIC_SORT
+    }
+
 }

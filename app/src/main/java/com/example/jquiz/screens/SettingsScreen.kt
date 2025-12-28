@@ -15,17 +15,28 @@ import com.example.jquiz.viewmodels.SettingsViewModel
 
 @Composable
 fun SettingsScreen(vm : SettingsViewModel) {
+    val isVip by vm.isVip.collectAsState()
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally)
+        //verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    )
     {
-        Text("Settings screen !", style = Typography.displayLarge)
-        val isVip by vm.isVip.collectAsState()
+        Text("Settings screen !", style = Typography.headlineMedium)
 
-        Switch(
-            checked = isVip,
-            onCheckedChange = { vm.toggleVip(it) }
-        )
+        Column(
+            modifier = Modifier
+                .weight(1f) // Prend tout l'espace vertical disponible
+                .fillMaxSize(), // Remplit l'espace alloué par le weight
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text("Turn on/off vip mode : ")
+
+            Switch(
+                checked = isVip,
+                onCheckedChange = { vm.toggleVip(it) }
+            )
+        }
     }
 }

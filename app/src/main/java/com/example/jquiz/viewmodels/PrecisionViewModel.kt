@@ -58,6 +58,10 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
         _question.value = null
     }
 
+    override fun getQuestionKind(): QuestionKind {
+        return QuestionKind.PRECISION
+    }
+
     fun getPrecisionResult(): QuizResult {
         return QuizResult(correctAnswersCount, questionsCount, QuestionKind.PRECISION, level, domains)
     }
@@ -69,6 +73,21 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
         answeredQuestion++
         if (answeredQuestion == questionsCount) {
             quizIsOver.value = true
+        }
+    }
+
+    fun saveQuestion(userAnswer : String) {
+        val gameQuestion = GameQuestions(
+            gameId = game.id,
+            isCorrect = _question.value!!.answer == userAnswer,
+            question = "What is the ${_question.value!!.label} of ${_question.value!!.objectName}?",
+            correctAnswer = _question . value !!. answer,
+            userAnswer = userAnswer,
+            questionData = ""
+
+        )
+        viewModelScope.launch {
+            gameQuestionsDao.AddGameQuestion(gameQuestion)
         }
     }
 }
