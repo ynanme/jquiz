@@ -39,7 +39,7 @@ fun MainScreen () {
 
     ModalNavigationDrawer(
         drawerState = drawerState,
-        drawerContent = { ModalDrawerSheet { DrawerContent() } }
+        drawerContent = { ModalDrawerSheet { DrawerContent(backStack, drawerState, scope) } }
     ) {
         Scaffold (
             topBar = { TopBar("${backStack.last()}") { scopeLauncher(drawerState, scope) } },
@@ -52,6 +52,7 @@ fun MainScreen () {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
                     entry<Screen.History> { HistoryScreen() }
+                    entry<Screen.Account> { AccountScreen() }
                 }
             )
         }
@@ -61,9 +62,13 @@ fun MainScreen () {
 
 
 @Composable
-fun DrawerContent () {
+fun DrawerContent (backStack: NavBackStack<NavKey>, drawerState: DrawerState, scope: CoroutineScope) {
     Column {
-        NavigationDrawerItem(selected = false, label = { Text("Account") }, onClick = {})
+        NavigationDrawerItem(
+            selected = false,
+            label = { Text("Account") },
+            onClick = { scope.launch { drawerState.close(); backStack += Screen.Account } }
+        )
         NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
         NavigationDrawerItem(selected = false, label = { Text("Notifications") }, onClick = {})
         NavigationDrawerItem(selected = false, label = { Text("About") }, onClick = {})

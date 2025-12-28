@@ -3,6 +3,7 @@ package com.example.jquiz.interfaces
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.History
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Quiz
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavKey
@@ -25,6 +26,11 @@ sealed interface Screen: NavKey {
     @Serializable
     data object History: Screen {
         override val icon = Icons.Filled.History
+    }
+
+    @Serializable
+    data object Account: Screen {
+        override val icon = Icons.Filled.Person
     }
 
 }
