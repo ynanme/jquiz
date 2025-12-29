@@ -46,8 +46,8 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
         Fields.CHEMICAL_ELEMENT to "CHEMISTRY",
         Fields.FOOTBALL_TEAM to "SPORTS",
         Fields.HISTORIC_EVENT to "HISTORY",
-        Fields.PLANET to "ASTRONOMY",
-        )
+        Fields.PLANET to "ASTRONOMY"
+    )
 
     var step = mutableStateOf(Step.TYPE_CHOICE)
     var chosenType = mutableStateOf<QuestionKind?>(null)
