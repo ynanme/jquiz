@@ -59,7 +59,7 @@ fun PrecisionQuestionBox(question : PrecisionQuestion, vm: PrecisionViewModel) {
         )
         Button(onClick = {
             vm.evaluateAnswer(userAnswer)
-            vm.saveQuestion(userAnswer, )
+            vm.saveQuestion(userAnswer)
             userAnswer = ""
             vm.generateQuestion()
         }) {Text("Submit")}

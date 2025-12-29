@@ -31,8 +31,8 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     public var quizIsOver = mutableStateOf(false)
     protected lateinit var game: Game
     protected var correctAnswersCount = 0
-
     protected val questionsCount = 5
+    protected var currentGameId: Long? = null
 
     public abstract fun reset();
 
@@ -40,28 +40,34 @@ abstract class QuizViewModel (application: Application, protected val domains: L
         return quizIsOver.value
     }
 
-     fun updateGame(endedGame: Boolean = true){
-        game.finalScore = (correctAnswersCount / questionsCount) * 100
-        game.endedGame = endedGame
-        viewModelScope.launch {
-            gameDao.update(game)
+    fun updateGame(endedGame: Boolean = true) {
+        game.let { currentGame ->
+            currentGame.finalScore = ((correctAnswersCount.toFloat() / questionsCount.toFloat()) * 100).toInt()
+            currentGame.endedGame = endedGame
+            viewModelScope.launch {
+                gameDao.update(currentGame)
+            }
         }
     }
 
     abstract fun getQuestionKind() : QuestionKind
 
 
-    fun launchGame() {
+    suspend fun launchGame() {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val current = LocalDateTime.now().format(formatter)
-        game = Game(finalScore = 0, date = current, difficulty = level.value, endedGame = false, type = getQuestionKind())
-        viewModelScope.launch {
-            gameDao.AddGame(game)
-        }
+        val newGame = Game(finalScore = 0, date = current, difficulty = level.value, endedGame = false, type = getQuestionKind())
+
+        val generatedId = gameDao.AddGame(newGame)
+        currentGameId = generatedId
+
+        game = newGame.copy(id = generatedId.toInt())
     }
 
     init{
-        launchGame()
+        viewModelScope.launch {
+            launchGame()
+        }
     }
 }
 

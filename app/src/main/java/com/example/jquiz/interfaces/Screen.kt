@@ -33,5 +33,13 @@ sealed interface Screen: NavKey {
         override val icon = Icons.Filled.Settings
     }
 
-
+    @Serializable
+    data class ViewQuestions(val gameId: Int): Screen {
+        @kotlinx.serialization.Transient
+        override val icon = Icons.Filled.History
+    }
 }
+
+
+
+

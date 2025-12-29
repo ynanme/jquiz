@@ -13,6 +13,8 @@ import com.example.jquiz.services.PrecisionGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty) :
     QuizViewModel(application, domains, level) {
@@ -78,12 +80,11 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
     fun saveQuestion(userAnswer : String) {
         val gameQuestion = GameQuestions(
-            gameId = game.id,
+            gameId = game.id.toInt(),
             isCorrect = _question.value!!.answer == userAnswer,
-            question = "What is the ${_question.value!!.label} of ${_question.value!!.objectName}?",
-            correctAnswer = _question . value !!. answer,
-            userAnswer = userAnswer,
-            questionData = ""
+            questionData = Json.encodeToString("What is the ${_question.value!!.label} of ${_question.value!!.objectName}?"),
+            correctAnswer = Json.encodeToString(_question . value !!. answer),
+            userAnswer = Json.encodeToString(userAnswer),
 
         )
         viewModelScope.launch {

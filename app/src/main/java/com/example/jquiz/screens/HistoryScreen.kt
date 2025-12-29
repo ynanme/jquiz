@@ -2,6 +2,7 @@
 
 package com.example.jquiz.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -18,7 +19,7 @@ import com.example.jquiz.data.models.Game
 import com.example.jquiz.viewmodels.HistoryViewModel
 
 @Composable
-fun HistoryScreen(vm: HistoryViewModel) {
+fun HistoryScreen(vm: HistoryViewModel, onGameSelected: (Int) -> Unit) {
     val games by vm.filteredGames.collectAsState(initial = emptyList())
 
     Column(modifier = Modifier.fillMaxSize()) {
@@ -31,8 +32,8 @@ fun HistoryScreen(vm: HistoryViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            items(games, key = { it.id }) { game -> // Utiliser une clé est une bonne pratique
-                DrawGameCard(game)
+            items(games, key = { it.id }) { game ->
+                DrawGameCard(game, onClick = { onGameSelected(game.id) })
                 Spacer(modifier = Modifier.height(12.dp))
             }
         }
@@ -43,18 +44,18 @@ fun HistoryScreen(vm: HistoryViewModel) {
 @Composable
 fun FilterDropDown(onFilterSelected: (GameFilter) -> Unit) {
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf("Toutes") }
+    var selectedText by remember { mutableStateOf("All") }
     val filterOptions = mapOf(
-        "Toutes" to GameFilter.ALL,
-        "Gagnées" to GameFilter.WON,
-        "Perdues" to GameFilter.LOST
+        "All" to GameFilter.ALL,
+        "Won" to GameFilter.WON,
+        "Lost" to GameFilter.LOST
     )
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp),
-        contentAlignment = Alignment.CenterEnd // Aligne le menu à droite
+        contentAlignment = Alignment.CenterEnd
     ) {
         ExposedDropdownMenuBox(
             expanded = expanded,
@@ -66,7 +67,7 @@ fun FilterDropDown(onFilterSelected: (GameFilter) -> Unit) {
                 readOnly = true,
                 label = { Text("Filtrer par") },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                modifier = Modifier.menuAnchor() // Ancre le menu au champ de texte
+                modifier = Modifier.menuAnchor()
             )
 
             ExposedDropdownMenu(
@@ -79,7 +80,7 @@ fun FilterDropDown(onFilterSelected: (GameFilter) -> Unit) {
                         onClick = {
                             selectedText = text
                             expanded = false
-                            onFilterSelected(filter) // Appelle la fonction du ViewModel
+                            onFilterSelected(filter)
                         }
                     )
                 }
@@ -90,10 +91,9 @@ fun FilterDropDown(onFilterSelected: (GameFilter) -> Unit) {
 
 
 @Composable
-fun DrawGameCard(game: Game) {
-    // ... Le code de DrawGameCard reste inchangé
+fun DrawGameCard(game: Game, onClick: () -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().clickable { onClick() },
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         shape = MaterialTheme.shapes.medium
     ) {
@@ -101,7 +101,7 @@ fun DrawGameCard(game: Game) {
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
-                text = "Partie n°${game.id}",
+                text = "Game n°${game.id}",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
@@ -115,9 +115,11 @@ fun DrawGameCard(game: Game) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Column {
-                    Text("Score final :", style = MaterialTheme.typography.bodyLarge)
+                    Text("Final score :", style = MaterialTheme.typography.bodyLarge)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("Joué le :", style = MaterialTheme.typography.bodyLarge)
+                    Text("Played :", style = MaterialTheme.typography.bodyLarge)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text("Finished :", style = MaterialTheme.typography.bodyLarge)
                 }
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
@@ -128,6 +130,12 @@ fun DrawGameCard(game: Game) {
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = game.date,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = game.endedGame.toString(),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

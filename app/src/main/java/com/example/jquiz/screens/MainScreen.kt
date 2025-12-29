@@ -1,5 +1,6 @@
 package com.example.jquiz.screens
 
+import ViewQuestionsScreen
 import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.foundation.layout.Column
@@ -30,9 +31,8 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.jquiz.interfaces.Screen
-import com.example.jquiz.services.VipService
 import com.example.jquiz.viewmodels.HistoryViewModel
-import com.example.jquiz.viewmodels.SettingsViewModel
+import com.example.jquiz.viewmodels.ViewQuestionsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -42,15 +42,12 @@ fun MainScreen () {
 
     val context = LocalContext.current
 
-    val vipService = androidx.compose.runtime.remember {
-        VipService(context)
-    }
-    val settingsVm = androidx.compose.runtime.remember {
-        SettingsViewModel(vipService)
-    }
-
     val historyVm = androidx.compose.runtime.remember {
         HistoryViewModel(context.applicationContext as Application)
+    }
+
+    val viewQuestionsVm = androidx.compose.runtime.remember {
+        ViewQuestionsViewModel(context.applicationContext as Application)
     }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
@@ -71,8 +68,9 @@ fun MainScreen () {
                 entryProvider = entryProvider {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
-                    entry<Screen.History> { HistoryScreen(historyVm) }
-                    entry<Screen.Settings> {SettingsScreen(settingsVm) }
+                    entry<Screen.History> { HistoryScreen(historyVm, { backStack+=Screen.ViewQuestions(it) }) }
+                    entry<Screen.Settings> {SettingsScreen()}
+                    entry<Screen.ViewQuestions> {ViewQuestionsScreen(viewQuestionsVm ,it.gameId) }
                 }
             )
         }

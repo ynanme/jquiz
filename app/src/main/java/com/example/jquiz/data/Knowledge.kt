@@ -18,6 +18,7 @@ import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.models.FootballTeam
 import com.example.jquiz.data.models.Country
 import com.example.jquiz.data.models.Game
+import com.example.jquiz.data.models.GameQuestions
 import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.models.QuestionType
 import com.example.jquiz.data.seed.DatabaseSeeder
@@ -26,7 +27,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [ChemicalElement::class, Country::class, FootballTeam::class, HistoricEvent::class, Planet::class, QuestionType::class, Game::class], version = 1)
+@Database(entities = [ChemicalElement::class, Country::class, FootballTeam::class, HistoricEvent::class, Planet::class, QuestionType::class, Game::class, GameQuestions::class], version = 1)
 abstract  class Knowledge : RoomDatabase() {
 
 

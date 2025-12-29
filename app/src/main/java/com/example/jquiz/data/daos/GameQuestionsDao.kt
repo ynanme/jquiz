@@ -14,13 +14,11 @@ interface GameQuestionsDao {
     suspend fun AddGameQuestion(gameQuestion : GameQuestions)
 
     @Query("SELECT * FROM GameQuestions WHERE Id = :id")
-    suspend fun GetGameQuestionById(id : Int)
+    suspend fun GetGameQuestionById(id : Int) : GameQuestions
+
 
     @Query("SELECT * FROM GameQuestions")
     fun LoadAllGameQuestions() : Flow<List<GameQuestions>>
-
-    @Delete
-    suspend fun Delete(id : Int);
 
     @Query("SELECT * FROM GameQuestions WHERE gameId = :gameId")
     fun LoadGameQuestionsByGameId(gameId : Int) : Flow<List<GameQuestions>>

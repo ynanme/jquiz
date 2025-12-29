@@ -14,7 +14,6 @@ data class GameQuestions (
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0,
     val gameId : Int,
-    val question : String,
     val questionData : String,
     val correctAnswer : String,
     val userAnswer : String,
