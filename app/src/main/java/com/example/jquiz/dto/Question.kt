@@ -14,19 +14,24 @@ abstract class Question {
 
 
 data class QCM(
+    override val field: Fields,
+    override val type: QuestionKind,
+    override val difficulty: Int,
     val label: String,
     val answer: String,
     val choices: List<String>
-)
+): Question()
 
 
 data class DynamicSortItem (
     val label: String,
-    val value: Int,
-    val ranking: Int
+    val value: Int
 )
 
 data class DynamicSortQuestion(
+    override val field: Fields,
+    override val type: QuestionKind,
+    override val difficulty: Int,
     val label: String,
     val items: List<DynamicSortItem>
-)
+): Question()

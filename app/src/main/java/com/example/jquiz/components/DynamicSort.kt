@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ElevatedCard
@@ -50,7 +51,7 @@ import androidx.compose.ui.unit.toSize
 fun DynamicSort(model: DynamicSortViewModel, onQuit: () -> Unit) {
 
     if (!model.isQuizOver()) DynamicSortQuestionBox(model)
-    else QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit() }
+    else QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit(); model.reset() }
 
 }
 
@@ -72,7 +73,7 @@ fun DynamicSortQuestionBox (model: DynamicSortViewModel) {
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        Text(text = model.question.label, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
+        Text(text = model.question.value?.label ?: "Sort", style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.primary)
 
         itemToSort?.let { ItemToSortCard(
             itemToSort,
@@ -87,11 +88,14 @@ fun DynamicSortQuestionBox (model: DynamicSortViewModel) {
                 draggedItem = null
                 dragPosition = Offset.Zero
             }
-        ) }
+        ) } ?: run {
+            Button(onClick = { model.endQuiz() }) { Text("Recap") }
+        }
 
         HorizontalDivider(Modifier, DividerDefaults.Thickness, DividerDefaults.color)
 
         SortedItems(model.sortedItems, slotBounds, draggedItem != null) { model.itemHasBeenInsertedCorrectly(it) }
+
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
