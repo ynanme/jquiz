@@ -13,6 +13,8 @@ import com.example.jquiz.services.PrecisionGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty) :
     QuizViewModel(application, domains, level) {
@@ -58,6 +60,10 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
         _question.value = null
     }
 
+    override fun getQuestionKind(): QuestionKind {
+        return QuestionKind.PRECISION
+    }
+
     fun getPrecisionResult(): QuizResult {
         return QuizResult(correctAnswersCount, questionsCount, QuestionKind.PRECISION, level, domains)
     }
@@ -69,6 +75,20 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
         answeredQuestion++
         if (answeredQuestion == questionsCount) {
             quizIsOver.value = true
+        }
+    }
+
+    fun saveQuestion(userAnswer : String) {
+        val gameQuestion = GameQuestions(
+            gameId = game.id.toInt(),
+            isCorrect = _question.value!!.answer == userAnswer,
+            questionData = Json.encodeToString("What is the ${_question.value!!.label} of ${_question.value!!.objectName}?"),
+            correctAnswer = Json.encodeToString(_question . value !!. answer),
+            userAnswer = Json.encodeToString(userAnswer),
+
+        )
+        viewModelScope.launch {
+            gameQuestionsDao.AddGameQuestion(gameQuestion)
         }
     }
 }

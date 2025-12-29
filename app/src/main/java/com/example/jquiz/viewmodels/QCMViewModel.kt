@@ -74,8 +74,12 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         correctAnswersCount = 0
     }
 
-    private fun evaluateCurrentAnswer() {
-        if (givenAnswer.value == question.value.answer) correctAnswersCount += 1
+    override fun getQuestionKind(): QuestionKind {
+        return QuestionKind.QCM
+    }
+
+    private fun evaluateCurrentAnswer () {
+        if (givenAnswer.value == getCurrentQuestion().answer) correctAnswersCount += 1
     }
 
 

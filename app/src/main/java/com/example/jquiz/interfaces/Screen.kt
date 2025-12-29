@@ -6,6 +6,7 @@ import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
@@ -37,6 +38,17 @@ sealed interface Screen: NavKey {
     @Serializable
     data object Notifications: Screen {
         override val icon = Icons.Filled.Notifications
+    }
+
+    @Serializable
+    data object Settings: Screen {
+        override val icon = Icons.Filled.Settings
+    }
+
+    @Serializable
+    data class ViewQuestions(val gameId: Int): Screen {
+        @kotlinx.serialization.Transient
+        override val icon = Icons.Filled.History
     }
 
 }

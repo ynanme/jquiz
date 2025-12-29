@@ -127,4 +127,8 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         }
     }
 
+    override fun getQuestionKind(): QuestionKind {
+        return QuestionKind.DYNAMIC_SORT
+    }
+
 }

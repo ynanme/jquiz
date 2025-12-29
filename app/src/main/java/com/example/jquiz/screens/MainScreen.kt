@@ -1,5 +1,8 @@
 package com.example.jquiz.screens
 
+import ViewQuestionsScreen
+import android.annotation.SuppressLint
+import android.app.Application
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -21,17 +24,31 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation3.runtime.NavBackStack
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
 import com.example.jquiz.interfaces.Screen
+import com.example.jquiz.viewmodels.HistoryViewModel
+import com.example.jquiz.viewmodels.ViewQuestionsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun MainScreen () {
+
+    val context = LocalContext.current
+
+    val historyVm = androidx.compose.runtime.remember {
+        HistoryViewModel(context.applicationContext as Application)
+    }
+
+    val viewQuestionsVm = androidx.compose.runtime.remember {
+        ViewQuestionsViewModel(context.applicationContext as Application)
+    }
 
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -51,7 +68,9 @@ fun MainScreen () {
                 entryProvider = entryProvider {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
-                    entry<Screen.History> { HistoryScreen() }
+                    entry<Screen.History> { HistoryScreen(historyVm, { backStack+=Screen.ViewQuestions(it) }) }
+                    entry<Screen.Settings> {SettingsScreen()}
+                    entry<Screen.ViewQuestions> {ViewQuestionsScreen(viewQuestionsVm ,it.gameId) }
                     entry<Screen.Account> { AccountScreen() }
                     entry<Screen.Notifications> { NotificationsScreen() }
                 }
@@ -99,7 +118,15 @@ fun BottomBar (backStack: NavBackStack<NavKey>, screens: List<Screen>) {
         screens.forEach {
             NavigationBarItem(
                 selected = it==current,
-                onClick = { backStack += it },
+                onClick = {
+                    if(current !in listOf(Screen.Quiz, Screen.Learning, Screen.History)) {
+                        backStack+=it
+                    }
+                    else if(it != current) {
+                        backStack.remove(current)
+                        backStack+=it
+                    }
+                },
                 icon = { Icon(it.icon, "$it") }
             )
         }
