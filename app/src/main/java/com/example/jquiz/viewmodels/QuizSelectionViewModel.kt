@@ -63,6 +63,7 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
     fun previous () {
         if (step.value == Step.DOMAINS_CHOICE) step.value = Step.TYPE_CHOICE
         else if (step.value == Step.QUIZ) step.value = Step.DOMAINS_CHOICE
+        chosenDomains.clear()
     }
 
     fun nextAfterDomains () {

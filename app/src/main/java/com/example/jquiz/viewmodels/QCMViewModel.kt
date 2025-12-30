@@ -72,6 +72,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         currentQuestionIndex.intValue = 1
         givenAnswer.value = ""
         correctAnswersCount = 0
+        generate()
     }
 
     override fun getQuestionKind(): QuestionKind {

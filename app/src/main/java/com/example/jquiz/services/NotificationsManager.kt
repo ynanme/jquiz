@@ -31,7 +31,7 @@ const val WORK_NAME = "reminder_work"
 
 
 enum class Frequency {
-    EVERY_MINUTE,
+    ONE_MINUTE_AFTER,
     HOURLY,
     DAILY,
     WEEKLY,
@@ -66,7 +66,7 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
         if (frequency == Frequency.NEVER) {
             workManager.cancelUniqueWork(WORK_NAME)
         } else {
-            if (frequency == Frequency.EVERY_MINUTE) {
+            if (frequency == Frequency.ONE_MINUTE_AFTER) {
                 val request = OneTimeWorkRequestBuilder<ReminderWorker>()
                     .setInitialDelay(1, TimeUnit.MINUTES)
                     .build()
@@ -81,7 +81,7 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
                     Frequency.HOURLY -> 1L to TimeUnit.HOURS
                     Frequency.DAILY  -> 1L to TimeUnit.DAYS
                     Frequency.WEEKLY -> 7L to TimeUnit.DAYS
-                    Frequency.EVERY_MINUTE -> TODO()
+                    Frequency.ONE_MINUTE_AFTER -> TODO()
                     Frequency.NEVER -> TODO()
                 }
 
