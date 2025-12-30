@@ -3,6 +3,8 @@ package com.example.jquiz.screens
 import ViewQuestionsScreen
 import android.annotation.SuppressLint
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -37,6 +39,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @SuppressLint("ViewModelConstructorInComposable")
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MainScreen () {
 
@@ -73,6 +76,7 @@ fun MainScreen () {
                     entry<Screen.ViewQuestions> {ViewQuestionsScreen(viewQuestionsVm ,it.gameId) }
                     entry<Screen.Account> { AccountScreen() }
                     entry<Screen.Notifications> { NotificationsScreen() }
+                    entry<Screen.Preferences> { PreferencesScreen() }
                 }
             )
         }
@@ -89,7 +93,11 @@ fun DrawerContent (backStack: NavBackStack<NavKey>, drawerState: DrawerState, sc
             label = { Text("Account") },
             onClick = { scope.launch { drawerState.close(); backStack += Screen.Account } }
         )
-        NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
+        NavigationDrawerItem(
+            selected = false,
+            label = { Text("Preferences") },
+            onClick = { scope.launch { drawerState.close(); backStack += Screen.Preferences } }
+        )
         NavigationDrawerItem(
             selected = false,
             label = { Text("Notifications") },
