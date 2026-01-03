@@ -1,5 +1,6 @@
 package com.example.jquiz.viewmodels
 
+import android.R.attr.level
 import android.app.Application
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -75,6 +76,8 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         currentQuestionIndex.intValue = 1
         givenAnswer.value = ""
         correctAnswersCount = 0
+        viewModelScope.launch { launchGame() }
+        generate()
     }
 
     override fun getQuestionKind(): QuestionKind {

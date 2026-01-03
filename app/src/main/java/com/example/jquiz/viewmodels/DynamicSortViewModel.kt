@@ -96,6 +96,9 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
     override fun reset () {
         quizIsOver.value = false
         correctAnswersCount = 0
+        viewModelScope.launch {
+            launchGame()
+        }
         generate()
     }
 

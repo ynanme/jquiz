@@ -85,6 +85,9 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
         _question.value = null
         quizIsOver.value = false
         correctAnswersCount = 0
+        viewModelScope.launch {
+            launchGame()
+        }
         generateQuestion()
     }
 

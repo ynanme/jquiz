@@ -64,6 +64,13 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
     override fun reset() {
         _question.value = null
+        correctAnswersCount = 0
+        answeredQuestion = 0
+        quizIsOver.value = false
+        viewModelScope.launch {
+            launchGame()
+        }
+        generateQuestion()
     }
 
     override fun getQuestionKind(): QuestionKind {
