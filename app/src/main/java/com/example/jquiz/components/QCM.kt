@@ -29,6 +29,7 @@ fun QCM(model: QCMViewModel, onQuit: () -> Unit) {
     if (!model.isQuizOver()) {
         QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) {model.saveQuestion() ;model.goToNextQuestion() }
     } else {
+        model.updateGame(true)
         QuizRecapBox(model.getQCMResult(), { model.reset() }, { onQuit(); model.reset() })
     }
 

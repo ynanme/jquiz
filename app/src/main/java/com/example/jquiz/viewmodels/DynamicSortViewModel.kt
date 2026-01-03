@@ -13,6 +13,7 @@ import com.example.jquiz.data.enums.QuestionKind
 import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.models.Country
 import com.example.jquiz.data.models.FootballTeam
+import com.example.jquiz.data.models.GameQuestions
 import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.models.Planet
 import com.example.jquiz.dto.DynamicSortItem
@@ -23,6 +24,8 @@ import com.example.jquiz.dto.QuizResult
 import com.example.jquiz.services.DynamicSortGenerator
 import com.example.jquiz.services.QCMGenerator
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import kotlin.random.Random
 
 
@@ -34,6 +37,8 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
     var sortedItems = mutableStateListOf<DynamicSortItem>()
     var itemToSort = mutableStateOf<DynamicSortItem?>(null)
     var evaluations = mutableStateMapOf<String, Boolean?>()
+    var userAnswers = mutableStateListOf<String>()
+
 
 
     init { generate() }
@@ -41,11 +46,16 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
     private fun getNextItem (): DynamicSortItem? {
         return if (remainingItems.isNotEmpty()) {
             remainingItems.removeAt(Random.nextInt(remainingItems.size))
-        } else null
+        } else{
+            saveQuestion()
+            updateGame()
+            null
+        }
     }
 
     fun trySort (index: Int) {
         sortedItems.add(index, itemToSort.value!!)
+        userAnswers.add(index ,itemToSort.value!!.label)
         sortedItems.sortBy { it.value }
         val evaluation = sortedItems.indexOf(itemToSort.value) == index
         evaluations[itemToSort.value!!.label] = evaluation
@@ -66,6 +76,23 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         quizIsOver.value = true
     }
 
+    fun saveQuestion() {
+        val sortedItemsLabels = sortedItems
+            .sortedBy { it.value }
+            .map { it.label }
+        val data = question.value!!.items.map { it.label }
+        val gameQuestion = GameQuestions(
+            gameId = game.id,
+            isCorrect = correctAnswersCount == questionsCount,
+            questionData = Json.encodeToString(value = data),
+            correctAnswer = Json.encodeToString(value = sortedItemsLabels),
+            userAnswer = Json.encodeToString(value = userAnswers.toList())
+        )
+        viewModelScope.launch {
+            gameQuestionsDao.AddGameQuestion(gameQuestion)
+        }
+    }
+
     override fun reset () {
         quizIsOver.value = false
         correctAnswersCount = 0
@@ -84,6 +111,7 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         itemToSort.value?.let { first ->
             sortedItems.add(first)
             evaluations[first.label] = true
+            userAnswers.add(first.label)
             itemToSort.value = getNextItem()
         }
     }

@@ -51,8 +51,9 @@ import androidx.compose.ui.unit.toSize
 fun DynamicSort(model: DynamicSortViewModel, onQuit: () -> Unit) {
 
     if (!model.isQuizOver()) DynamicSortQuestionBox(model)
-    else QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit(); model.reset() }
-
+    else {
+        QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit(); model.reset() }
+    }
 }
 
 
