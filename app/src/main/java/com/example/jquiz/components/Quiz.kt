@@ -10,6 +10,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
 import com.example.jquiz.data.enums.QuestionKind
+import com.example.jquiz.viewmodels.DynamicSortViewModel
+import com.example.jquiz.viewmodels.MatchViewModel
+import com.example.jquiz.viewmodels.PrecisionViewModel
+import com.example.jquiz.viewmodels.QCMViewModel
+import com.example.jquiz.viewmodels.QuizViewModel
 import com.example.jquiz.viewmodels.QuizViewModelFactory
 
 
@@ -25,13 +30,29 @@ fun Quizer (
 
     when (chosenType) {
 
-        QuestionKind.QCM -> QCM(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+        QuestionKind.QCM -> {
+            val vm : QCMViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            vm.reset()
+            QCM(vm, onPrevious)
+        }
 
-        QuestionKind.PRECISION ->Precision(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+        QuestionKind.PRECISION -> {
+            val vm : PrecisionViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            vm.reset()
+            Precision(vm, onPrevious)
+        }
 
-        QuestionKind.DYNAMIC_SORT -> DynamicSort(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+        QuestionKind.DYNAMIC_SORT -> {
+            val vm : DynamicSortViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            vm.reset()
+            DynamicSort(vm, onPrevious)
+        }
 
-        QuestionKind.MATCH -> Match( viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+        QuestionKind.MATCH -> {
+            val vm : MatchViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            vm.reset()
+            Match( vm, onPrevious)
+        }
 
 
         else -> {

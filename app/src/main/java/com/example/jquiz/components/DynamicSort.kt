@@ -52,7 +52,7 @@ fun DynamicSort(model: DynamicSortViewModel, onQuit: () -> Unit) {
 
     if (!model.isQuizOver()) DynamicSortQuestionBox(model)
     else {
-        QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit(); model.reset() }
+        QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit() }
     }
 }
 

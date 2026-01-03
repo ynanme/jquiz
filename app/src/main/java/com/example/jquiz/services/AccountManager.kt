@@ -53,8 +53,7 @@ class AccountManager (private val account: DataStore<Preferences>) {
 
     suspend fun canQuiz (): Boolean {
         val isPremium = account.data.first()[isPremiumKey] ?: DEFAULT_IS_PREMIUM
-        //return isPremium || remainingTime() == 0L
-        return true
+        return isPremium || remainingTime() == 0L
     }
 
     suspend fun registerNewQuiz () {

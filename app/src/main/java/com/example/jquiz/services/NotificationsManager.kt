@@ -21,7 +21,9 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.jquiz.MainActivity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import java.util.Collections.frequency
 import java.util.concurrent.TimeUnit
 
 
@@ -44,6 +46,7 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
     private val frequencyKey = stringPreferencesKey("frequency")
     private val permissionsGrantedKey = booleanPreferencesKey("permissionsGranted")
 
+
     fun getFrequencyFlow (): Flow<Frequency> {
         return notifications.data.map { Frequency.valueOf(it[frequencyKey] ?: Frequency.NEVER.name) }
     }
@@ -51,6 +54,34 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
     fun getPermissionsFlow (): Flow<Boolean> {
         return notifications.data.map { it[permissionsGrantedKey] ?: false }
     }
+
+    suspend fun hasNotificationPermission(): Boolean {
+        return notifications.data
+            .map { it[permissionsGrantedKey] ?: false }
+            .first()
+    }
+
+    fun scheduleCooldownFinished(
+        delayMillis: Long,
+        context: Context
+    ) {
+        val data = androidx.work.workDataOf(
+            "notification_text" to "Cooldown finished  You can start a new quiz!"
+        )
+
+        val request = OneTimeWorkRequestBuilder<ReminderWorker>()
+            .setInitialDelay(delayMillis, TimeUnit.MILLISECONDS)
+            .setInputData(data)
+            .build()
+
+        WorkManager.getInstance(context).enqueueUniqueWork(
+            "cooldown_finished",
+            ExistingWorkPolicy.REPLACE,
+            request
+        )
+    }
+
+
 
     suspend fun setFrequency (frequency: Frequency) {
         notifications.edit { it[frequencyKey] = frequency.name }
@@ -66,22 +97,11 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
         if (frequency == Frequency.NEVER) {
             workManager.cancelUniqueWork(WORK_NAME)
         } else {
-            if (frequency == Frequency.EVERY_MINUTE) {
-                val request = OneTimeWorkRequestBuilder<ReminderWorker>()
-                    .setInitialDelay(1, TimeUnit.MINUTES)
-                    .build()
-
-                workManager.enqueueUniqueWork(
-                    WORK_NAME,
-                    ExistingWorkPolicy.REPLACE,
-                    request
-                )
-            } else {
                 val repeatInterval = when (frequency) {
                     Frequency.HOURLY -> 1L to TimeUnit.HOURS
                     Frequency.DAILY  -> 1L to TimeUnit.DAYS
                     Frequency.WEEKLY -> 7L to TimeUnit.DAYS
-                    Frequency.EVERY_MINUTE -> TODO()
+                    Frequency.EVERY_MINUTE -> 1L to TimeUnit.MINUTES
                     Frequency.NEVER -> TODO()
                 }
 
@@ -100,20 +120,22 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
 
     }
 
-}
-
 
 class ReminderWorker (val context: Context, params: WorkerParameters) : Worker(context, params) {
 
     override fun doWork(): Result {
-        createNotification(context)
+        val text = inputData.getString("notification_text")
+            ?: "mind to jquiz a lil bit ?"
+
+        createNotification(context, text)
         return Result.success()
     }
+
 
 }
 
 
-fun createNotification (context: Context) {
+fun createNotification (context: Context, text: String = "mind to jquiz a lil bit ?") {
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val intent = Intent(context, MainActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(
@@ -124,8 +146,8 @@ fun createNotification (context: Context) {
     )
     val notification = NotificationCompat.Builder(context, CHANNEL_ID)
         .setSmallIcon(android.R.drawable.ic_popup_reminder)
-        .setContentTitle("hey !")
-        .setContentText("mind to jquiz a lil bit ?")
+        .setContentTitle("JQUIZ Reminder")
+        .setContentText(text)
         .setContentIntent(pendingIntent)
         .setAutoCancel(true)
         .build()

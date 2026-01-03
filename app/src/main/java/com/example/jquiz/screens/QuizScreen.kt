@@ -1,32 +1,44 @@
 package com.example.jquiz.screens
 
+import android.Manifest
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jquiz.components.QuizCooldown
 import com.example.jquiz.components.QuizDomainsChooser
 import com.example.jquiz.components.QuizTypeChooser
 import com.example.jquiz.components.Quizer
-import com.example.jquiz.data.enums.Difficulty
-import com.example.jquiz.data.enums.Fields
-import com.example.jquiz.data.enums.QuestionKind
+
 import com.example.jquiz.viewmodels.QuizSelectionViewModel
 import com.example.jquiz.viewmodels.Step
 
 
 @Composable
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 fun QuizScreen (model: QuizSelectionViewModel = viewModel()) {
 
     var step by model.step
+    val remainingTime by model.remainingTime
+    val shouldAskPermission by model.shouldAskNotificationPermission
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        model.onNotificationPermissionResult(granted)
+    }
 
-    var chosenType by model.chosenType
-    var chosenLevel by model.chosenLevel
-    val chosenDomains = model.chosenDomains
+    LaunchedEffect(shouldAskPermission) {
+        if (shouldAskPermission) {
+            permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
 
 
     when (step) {
@@ -36,7 +48,7 @@ fun QuizScreen (model: QuizSelectionViewModel = viewModel()) {
             model.levelFields,
             { model.choseType(it) },
             { model.choseLevel(it) },
-            chosenLevel
+            model.chosenLevel.value
         )
 
         Step.DOMAINS_CHOICE -> QuizDomainsChooser(
@@ -48,12 +60,15 @@ fun QuizScreen (model: QuizSelectionViewModel = viewModel()) {
         )
 
         Step.QUIZ -> {
-            val canQuiz by model.canQuiz
-            val remainingTime by model.remainingTime
-            if (canQuiz) {
-                Quizer(chosenType, chosenLevel, chosenDomains) { model.previous() }
-                LaunchedEffect(Unit) { model.registerQuizTimestamp() }
-            } else QuizCooldown(remainingTime)
+            Quizer(
+                model.chosenType.value,
+                model.chosenLevel.value,
+                model.chosenDomains
+            ) { model.previous() }
+        }
+
+        Step.COOLDOWN -> {
+            QuizCooldown(remainingTime)
         }
 
     }

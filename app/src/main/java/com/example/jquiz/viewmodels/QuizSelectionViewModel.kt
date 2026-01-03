@@ -1,15 +1,23 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
 import com.example.jquiz.data.enums.QuestionKind
 import com.example.jquiz.services.AccountManager
+import com.example.jquiz.services.NotificationsManager
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -17,16 +25,24 @@ import kotlinx.coroutines.launch
 enum class Step {
     TYPE_CHOICE,
     DOMAINS_CHOICE,
-    QUIZ
+    QUIZ,
+    COOLDOWN
 }
-
 
 class QuizSelectionViewModel (application: Application): AndroidViewModel(application) {
 
     private val accountManager = AccountManager(application.accountDatastore)
 
-    val canQuiz = mutableStateOf(true)
+    val canQuiz = mutableStateOf(false)
     val remainingTime = mutableLongStateOf(0L)
+    private var cooldownJob: Job? = null
+    val notificationsManager = NotificationsManager(
+        notifications = application.notificationsDataStore
+    )
+    val shouldAskNotificationPermission = mutableStateOf(false)
+
+
+
 
     val typeFields = listOf(
         QuestionKind.QCM to "QCM",
@@ -57,7 +73,9 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
 
     fun next () {
         if (step.value == Step.TYPE_CHOICE) step.value = Step.DOMAINS_CHOICE
-        else if (step.value == Step.DOMAINS_CHOICE) step.value = Step.QUIZ
+        else if (step.value == Step.DOMAINS_CHOICE) {
+            tryStartQuiz()
+        }
     }
 
     fun previous () {
@@ -95,27 +113,61 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
     }
 
 
-    suspend fun canQuiz (): Boolean {
-        return accountManager.canQuiz()
-    }
-
-    fun registerQuizTimestamp () {
-        viewModelScope.launch {
-            accountManager.registerNewQuiz()
-            refreshQuizState()
-        }
-    }
-
-    suspend fun remainingTime (): Long {
-        return accountManager.remainingTime()
-    }
-
     fun refreshQuizState() {
         viewModelScope.launch {
             canQuiz.value = accountManager.canQuiz()
             remainingTime.longValue = accountManager.remainingTime()
         }
     }
+
+    fun tryStartQuiz() {
+        viewModelScope.launch {
+            if (accountManager.canQuiz()) {
+                accountManager.registerNewQuiz()
+                canQuiz.value = true
+                step.value = Step.QUIZ
+                return@launch
+            }
+            canQuiz.value = false
+            step.value = Step.COOLDOWN
+            val hasPermission =
+                notificationsManager.hasNotificationPermission()
+
+            shouldAskNotificationPermission.value = !hasPermission
+
+            notificationsManager.scheduleCooldownFinished(
+                accountManager.remainingTime(),
+                application.applicationContext
+            )
+
+            startCooldown()
+        }
+    }
+
+    fun onNotificationPermissionResult(granted: Boolean) {
+        viewModelScope.launch {
+            notificationsManager.setPermissions(granted)
+            shouldAskNotificationPermission.value = false
+        }
+    }
+
+
+    private fun startCooldown() {
+        cooldownJob?.cancel()
+        cooldownJob = viewModelScope.launch {
+            while (true) {
+                val time = accountManager.remainingTime()
+                remainingTime.longValue = time
+                if (time <= 0L) {
+                    canQuiz.value = true
+                    step.value = Step.DOMAINS_CHOICE
+                    break
+                }
+                delay(1_000)
+            }
+        }
+    }
+
 
     init {
         refreshQuizState()
