@@ -1,6 +1,6 @@
 package com.example.jquiz.dto
 
-import android.R
+import kotlinx.serialization.Serializable
 import com.example.jquiz.data.enums.Fields
 import com.example.jquiz.data.enums.QuestionKind
 
@@ -52,6 +52,7 @@ data class MatchQuestion(
     val items: List<MatchItem>
 ) : Question()
 
+@Serializable
 data class MatchItem(
     val name: String,
     val value: String

@@ -19,6 +19,8 @@ import com.example.jquiz.services.MatchGenerator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class MatchViewModel(application: Application, domains: List<Fields>, level: Difficulty, ) :
     QuizViewModel(application, domains, level)
@@ -30,6 +32,7 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
     }
 
     private val _question = MutableStateFlow<MatchQuestion?>(null)
+    private val userAnswers = mutableListOf<MatchItem>()
     val question: StateFlow<MatchQuestion?> = _question
     var remainingMatches = questionsCount
 
@@ -65,6 +68,7 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
      fun evaluate(userAnswer: MatchItem) {
         if(userAnswer in _question.value!!.items) correctAnswersCount++
          remainingMatches-=1
+         userAnswers.add(userAnswer)
     }
 
 
@@ -89,10 +93,13 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
         val gameQuestion = GameQuestions(
             gameId = game.id,
             isCorrect = correctAnswersCount == questionsCount,
-            questionData = "",
-            correctAnswer = "",
-            userAnswer = "",
+            questionData = Json.encodeToString(value = _question.value!!.label),
+            userAnswer = Json.encodeToString(value = userAnswers.toList()),
+            correctAnswer = Json.encodeToString(value = _question.value!!.items),
         )
+        viewModelScope.launch {
+            gameQuestionsDao.AddGameQuestion(gameQuestion)
+        }
 
     }
 
