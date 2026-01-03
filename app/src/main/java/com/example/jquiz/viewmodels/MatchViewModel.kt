@@ -1,6 +1,7 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
@@ -16,6 +17,7 @@ import com.example.jquiz.dto.MatchQuestion
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.dto.QuizResult
 import com.example.jquiz.services.MatchGenerator
+import com.example.jquiz.services.Translator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -31,6 +33,7 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
         Difficulty.HARD -> 8
     }
 
+
     private val _question = MutableStateFlow<MatchQuestion?>(null)
     private val userAnswers = mutableListOf<MatchItem>()
     val question: StateFlow<MatchQuestion?> = _question
@@ -44,24 +47,30 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
                     val generator = MatchGenerator<ChemicalElement>()
                     generator.generate(spec, chemicalElementsDao)
                 }
+
                 Fields.PLANET -> {
                     val generator = MatchGenerator<Planet>()
                     generator.generate(spec, planetsDao)
                 }
+
                 Fields.HISTORIC_EVENT -> {
                     val generator = MatchGenerator<HistoricEvent>()
                     generator.generate(spec, historicEventsDao)
                 }
+
                 Fields.FOOTBALL_TEAM -> {
                     val generator = MatchGenerator<FootballTeam>()
                     generator.generate(spec, footballTeamsDao)
                 }
+
                 Fields.COUNTRY -> {
                     val generator = MatchGenerator<Country>()
                     generator.generate(spec, countriesDao)
                 }
             }
+            generatedQuestion?.label = Translator.getLabelOrNull(application.applicationContext, generatedQuestion.label) ?: generatedQuestion.label
             _question.value = generatedQuestion as? MatchQuestion
+
         }
     }
 

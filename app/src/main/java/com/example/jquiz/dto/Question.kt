@@ -8,6 +8,7 @@ abstract class Question {
     abstract val field: Fields
     abstract val type: QuestionKind
     abstract val difficulty: Int
+    abstract var label: String
 }
 
 
@@ -15,7 +16,7 @@ data class QCM(
     override val field: Fields,
     override val type: QuestionKind,
     override val difficulty: Int,
-    val label: String,
+    override var label: String,
     val answer: String,
     val choices: List<String>
 ): Question()
@@ -30,7 +31,7 @@ data class DynamicSortQuestion(
     override val field: Fields,
     override val type: QuestionKind,
     override val difficulty: Int,
-    val label: String,
+    override var label: String,
     val items: List<DynamicSortItem>
 ): Question()
 
@@ -39,7 +40,7 @@ data class PrecisionQuestion(
     override val field: Fields,
     override val type: QuestionKind,
     override val difficulty: Int,
-    val label: String,
+    override var label: String,
     val answer: String,
     val objectName: String
 ) : Question()
@@ -48,7 +49,7 @@ data class MatchQuestion(
     override val field: Fields,
     override val type: QuestionKind,
     override val difficulty: Int,
-    val label: String,
+    override var label: String,
     val items: List<MatchItem>
 ) : Question()
 

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">JQuiz</string>
+    <string name="atomicNumber">Atomic number</string>
+    <string name="atomicMass">Atomic mass</string>
+    <string name="yearOfFoundation">Year of foundation</string>
+    <string name="c1Count">Champions league cups</string>
+    <string name="euCount">Europa league cups</string>
+
 </resources>

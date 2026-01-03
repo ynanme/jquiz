@@ -8,7 +8,6 @@ import com.example.jquiz.data.models.Country
 import com.example.jquiz.data.models.FootballTeam
 import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.models.Planet
-import com.example.jquiz.data.models.QuestionType
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
@@ -27,7 +26,6 @@ class DatabaseSeeder(
             seedCountries()
             seedFootballTeams()
             seedHistoricEvents()
-            seedQuestionTypes()
         }
     }
 
@@ -91,17 +89,5 @@ class DatabaseSeeder(
         db.historicEventsDao().insertAll(events)
     }
 
-    private suspend fun seedQuestionTypes() {
-        if(db.questionTypeDao().count() > 0) return
-
-        val rawJson = context.readAsset("seed/questionType.json")
-        val types = json.decodeFromString(
-            ListSerializer(QuestionType.serializer()),
-            rawJson
-        )
-
-        db.questionTypeDao().insertAll(types)
-
-    }
 
 }

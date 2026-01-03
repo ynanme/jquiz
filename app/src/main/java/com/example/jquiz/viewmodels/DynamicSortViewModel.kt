@@ -1,11 +1,10 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.traceEventEnd
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
@@ -18,11 +17,10 @@ import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.models.Planet
 import com.example.jquiz.dto.DynamicSortItem
 import com.example.jquiz.dto.DynamicSortQuestion
-import com.example.jquiz.dto.QCM
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.dto.QuizResult
 import com.example.jquiz.services.DynamicSortGenerator
-import com.example.jquiz.services.QCMGenerator
+import com.example.jquiz.services.Translator
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -150,6 +148,14 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
                 }
             }
             if (generatedQuestion != null) {
+                val propertyName = generatedQuestion.label.substringAfter(" of ")
+                val originalLabel = generatedQuestion.label
+                val translatedProperty =
+                    Translator.getLabelOrNull(application.applicationContext, propertyName)
+                if (translatedProperty != null) {
+                    generatedQuestion.label =
+                        originalLabel.replaceFirst(propertyName, translatedProperty)
+                }
                 question.value = (generatedQuestion as? DynamicSortQuestion)!!
                 setupQuestion(generatedQuestion)
             }

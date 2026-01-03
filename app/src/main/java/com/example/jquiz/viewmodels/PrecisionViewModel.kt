@@ -1,6 +1,7 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
@@ -10,6 +11,7 @@ import com.example.jquiz.dto.PrecisionQuestion
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.dto.QuizResult
 import com.example.jquiz.services.PrecisionGenerator
+import com.example.jquiz.services.Translator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -17,7 +19,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty,
-                         override val questionsCount: Int = 1
+                         override val questionsCount: Int = 5
 ) :
     QuizViewModel(application, domains, level) {
 
@@ -30,7 +32,7 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
         viewModelScope.launch {
             val domain = domains.random()
-            val spec = QuestionSpec(level, domain, questionsCount)
+            val spec = QuestionSpec(level, domain, 1)
 
             val generatedQuestion = when (domain) {
                 Fields.CHEMICAL_ELEMENT -> {
@@ -54,7 +56,9 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
                     generator.generate(spec, countriesDao)
                 }
             }
+            generatedQuestion?.label = Translator.getLabelOrNull(application.applicationContext, generatedQuestion.label) ?: generatedQuestion.label
             _question.value = generatedQuestion as? PrecisionQuestion
+
         }
     }
 

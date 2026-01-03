@@ -3,6 +3,7 @@ package com.example.jquiz.viewmodels
 import android.app.Application
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.Fields
@@ -17,6 +18,7 @@ import com.example.jquiz.dto.QCM
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.dto.QuizResult
 import com.example.jquiz.services.QCMGenerator
+import com.example.jquiz.services.Translator
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -127,6 +129,14 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
                     val generator = QCMGenerator<Country>()
                     generator.generate(spec, countriesDao)
                 }
+            }
+            val propertyName = generatedQuestion?.label?.substringBefore(" of ")
+            val originalLabel = generatedQuestion?.label ?: "Question"
+            val translatedProperty =
+                Translator.getLabelOrNull(application.applicationContext, propertyName)
+            if (translatedProperty != null) {
+                generatedQuestion?.label =
+                    originalLabel.replaceFirst(propertyName!!, translatedProperty)
             }
             question.value = (generatedQuestion as? QCM)!!
         }
