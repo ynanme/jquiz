@@ -27,7 +27,7 @@ import com.example.jquiz.viewmodels.QCMViewModel
 fun QCM(model: QCMViewModel, onQuit: () -> Unit) {
 
     if (!model.isQuizOver()) {
-        QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) { model.goToNextQuestion() }
+        QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) {model.saveQuestion() ;model.goToNextQuestion() }
     } else {
         QuizRecapBox(model.getQCMResult(), { model.reset() }, { onQuit(); model.reset() })
     }

@@ -10,15 +10,16 @@ import com.example.jquiz.data.enums.QuestionKind
 import com.example.jquiz.data.models.ChemicalElement
 import com.example.jquiz.data.models.Country
 import com.example.jquiz.data.models.FootballTeam
+import com.example.jquiz.data.models.GameQuestions
 import com.example.jquiz.data.models.HistoricEvent
 import com.example.jquiz.data.models.Planet
-import com.example.jquiz.dto.PrecisionQuestion
 import com.example.jquiz.dto.QCM
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.dto.QuizResult
-import com.example.jquiz.services.PrecisionGenerator
 import com.example.jquiz.services.QCMGenerator
 import kotlinx.coroutines.launch
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 
 class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty): QuizViewModel(application, domains, level) {
@@ -80,6 +81,19 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
 
     private fun evaluateCurrentAnswer () {
         if (givenAnswer.value == getCurrentQuestion().answer) correctAnswersCount += 1
+    }
+
+    fun saveQuestion() {
+        val gameQuestion = GameQuestions(
+            gameId = game.id,
+            isCorrect = givenAnswer.value == question.value.answer,
+            questionData = Json.encodeToString(value =question.value.label),
+            correctAnswer = Json.encodeToString(value =question.value.answer),
+            userAnswer = Json.encodeToString(value =givenAnswer.value),
+        )
+        viewModelScope.launch {
+            gameQuestionsDao.AddGameQuestion(gameQuestion)
+        }
     }
 
 

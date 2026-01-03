@@ -3,6 +3,8 @@ package com.example.jquiz.screens
 import ViewQuestionsScreen
 import android.annotation.SuppressLint
 import android.app.Application
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -36,6 +38,7 @@ import com.example.jquiz.viewmodels.ViewQuestionsViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @SuppressLint("ViewModelConstructorInComposable")
 @Composable
 fun MainScreen () {

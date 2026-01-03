@@ -80,7 +80,7 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
     fun saveQuestion(userAnswer : String) {
         val gameQuestion = GameQuestions(
-            gameId = game.id.toInt(),
+            gameId = game.id,
             isCorrect = _question.value!!.answer == userAnswer,
             questionData = Json.encodeToString("What is the ${_question.value!!.label} of ${_question.value!!.objectName}?"),
             correctAnswer = Json.encodeToString(_question . value !!. answer),
