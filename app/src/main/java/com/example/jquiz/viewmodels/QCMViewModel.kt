@@ -22,9 +22,9 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 
-class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty): QuizViewModel(application, domains, level) {
-
-    private val QUESTION_COUNT = 5
+class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty,
+                    override val questionsCount: Int = 5
+): QuizViewModel(application, domains, level) {
 
 
     private var currentQuestionIndex = mutableIntStateOf(1)
@@ -56,7 +56,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
 
     fun goToNextQuestion() {
         evaluateCurrentAnswer()
-        if (currentQuestionIndex.intValue < QUESTION_COUNT) {
+        if (currentQuestionIndex.intValue < questionsCount) {
             currentQuestionIndex.intValue += 1
             givenAnswer.value = ""
             generate()

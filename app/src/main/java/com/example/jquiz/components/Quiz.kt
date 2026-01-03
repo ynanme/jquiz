@@ -31,6 +31,9 @@ fun Quizer (
 
         QuestionKind.DYNAMIC_SORT -> DynamicSort(viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
 
+        QuestionKind.MATCH -> Match( viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel)), onPrevious)
+
+
         else -> {
             Column {
                 Text("Unsupported Quiz !")

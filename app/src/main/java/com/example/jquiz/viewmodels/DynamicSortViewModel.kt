@@ -29,7 +29,9 @@ import kotlinx.serialization.json.Json
 import kotlin.random.Random
 
 
-class DynamicSortViewModel (application: Application, domains: List<Fields>, level: Difficulty): QuizViewModel(application, domains, level) {
+class DynamicSortViewModel (application: Application, domains: List<Fields>, level: Difficulty,
+                            override val questionsCount: Int = 5
+): QuizViewModel(application, domains, level) {
 
     var question = mutableStateOf<DynamicSortQuestion?>(null)
 

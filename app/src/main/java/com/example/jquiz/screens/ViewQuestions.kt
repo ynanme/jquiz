@@ -41,7 +41,7 @@ fun ViewQuestionsScreen(vm: ViewQuestionsViewModel, gameId: Int) {
                             val questionText = Json.decodeFromString<String>(question.questionData)
                             Text(questionText, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
                         }
-                        QuestionKind.SORT, QuestionKind.DYNAMIC_SORT -> {
+                        QuestionKind.MATCH, QuestionKind.DYNAMIC_SORT -> {
                             val itemsToSort = Json.decodeFromString<List<String>>(question.questionData)
                             Column {
                                 itemsToSort.forEachIndexed { index, item ->
@@ -57,7 +57,7 @@ fun ViewQuestionsScreen(vm: ViewQuestionsViewModel, gameId: Int) {
                             val userAnswer = Json.decodeFromString<String>(question.userAnswer)
                             Text(userAnswer, color = if (question.isCorrect) Color.Unspecified else MaterialTheme.colorScheme.error)
                         }
-                        QuestionKind.SORT, QuestionKind.DYNAMIC_SORT -> {
+                        QuestionKind.MATCH, QuestionKind.DYNAMIC_SORT -> {
                             val userSortedList = Json.decodeFromString<List<String>>(question.userAnswer)
                             Column {
                                 userSortedList.forEachIndexed { index, item ->
@@ -73,7 +73,7 @@ fun ViewQuestionsScreen(vm: ViewQuestionsViewModel, gameId: Int) {
                             val correctAnswer = Json.decodeFromString<String>(question.correctAnswer)
                             Text(correctAnswer, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
-                        QuestionKind.SORT, QuestionKind.DYNAMIC_SORT -> {
+                        QuestionKind.MATCH, QuestionKind.DYNAMIC_SORT -> {
                             val correctSortedList = Json.decodeFromString<List<String>>(question.correctAnswer)
                             Column {
                                 correctSortedList.forEachIndexed { index, item ->

@@ -27,13 +27,12 @@ class PrecisionGenerator<T : Any> : QuestionGenerator<T> {
         val answerProps = allProps
             .filter { it.findAnnotation<ObjectName>() == null }
             .filter { it.name !in setOf("id", "notoriety" )}
-            .filter { prop -> (prop.getter.call(row) is Number) }
 
         val randomProp = answerProps.randomOrNull() ?: run {
             return null
         }
 
-        val v: String = randomProp.getter.call(row)?.toString() ?: "N/A"
+        val v: String = randomProp.getter.call(row)?.toString() ?: ""
         val label: String = randomProp.name
 
         return PrecisionQuestion(

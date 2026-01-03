@@ -31,7 +31,7 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
     val typeFields = listOf(
         QuestionKind.QCM to "QCM",
         QuestionKind.PRECISION to "PRECISION",
-        QuestionKind.SORT to "SORT",
+        QuestionKind.MATCH to "MATCH",
         QuestionKind.DYNAMIC_SORT to "DYNAMIC SORT"
     )
 

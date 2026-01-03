@@ -31,7 +31,7 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     public var quizIsOver = mutableStateOf(false)
     protected lateinit var game: Game
     protected var correctAnswersCount = 0
-    protected val questionsCount = 5
+    abstract val questionsCount : Int
     protected var currentGameId: Long? = null
 
     public abstract fun reset();
@@ -91,6 +91,9 @@ class QuizViewModelFactory(
 
             modelClass.isAssignableFrom(DynamicSortViewModel::class.java) ->
                 DynamicSortViewModel(application, domains, level) as T
+
+            modelClass.isAssignableFrom(MatchViewModel::class.java) ->
+                MatchViewModel(application, domains, level) as T
 
             else -> throw IllegalArgumentException("Unknown ViewModel")
 

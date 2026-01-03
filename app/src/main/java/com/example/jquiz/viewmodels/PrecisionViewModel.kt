@@ -16,7 +16,9 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty) :
+class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty,
+                         override val questionsCount: Int = 1
+) :
     QuizViewModel(application, domains, level) {
 
     private val _question = MutableStateFlow<PrecisionQuestion?>(null)
@@ -28,7 +30,7 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
         viewModelScope.launch {
             val domain = domains.random()
-            val spec = QuestionSpec(level, domain, count = 1)
+            val spec = QuestionSpec(level, domain, questionsCount)
 
             val generatedQuestion = when (domain) {
                 Fields.CHEMICAL_ELEMENT -> {
