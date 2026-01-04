@@ -40,6 +40,7 @@ import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @SuppressLint("ViewModelConstructorInComposable")
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MainScreen () {
 
@@ -76,6 +77,7 @@ fun MainScreen () {
                     entry<Screen.ViewQuestions> {ViewQuestionsScreen(viewQuestionsVm ,it.gameId) }
                     entry<Screen.Account> { AccountScreen() }
                     entry<Screen.Notifications> { NotificationsScreen() }
+                    entry<Screen.Preferences> { PreferencesScreen() }
                 }
             )
         }
@@ -92,7 +94,11 @@ fun DrawerContent (backStack: NavBackStack<NavKey>, drawerState: DrawerState, sc
             label = { Text("Account") },
             onClick = { scope.launch { drawerState.close(); backStack += Screen.Account } }
         )
-        NavigationDrawerItem(selected = false, label = { Text("Preferences") }, onClick = {})
+        NavigationDrawerItem(
+            selected = false,
+            label = { Text("Preferences") },
+            onClick = { scope.launch { drawerState.close(); backStack += Screen.Preferences } }
+        )
         NavigationDrawerItem(
             selected = false,
             label = { Text("Notifications") },

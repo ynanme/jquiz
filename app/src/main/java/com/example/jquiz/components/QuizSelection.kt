@@ -94,7 +94,7 @@ fun QuizDomainsChooser (
                 item { QuizParamCard(label, { domainsSelector(domain) }, domainIsChosen(domain)) }
             }
         }
-        Button(onClick = onNext, modifier = Modifier.Companion.fillMaxWidth().padding(16.dp)) { Text("Quiz ->") }
+        Button(onClick = onNext, modifier = Modifier.Companion.fillMaxWidth().padding(16.dp)) { Text("Go ->") }
         Button(onClick = onPrevious, modifier = Modifier.Companion.fillMaxWidth().padding(16.dp)) { Text("<- Back") }
     }
 }
