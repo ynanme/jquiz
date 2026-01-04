@@ -40,7 +40,6 @@ import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @SuppressLint("ViewModelConstructorInComposable")
-@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MainScreen () {
 

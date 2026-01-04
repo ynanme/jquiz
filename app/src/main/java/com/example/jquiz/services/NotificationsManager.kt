@@ -120,7 +120,6 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
 
     }
 
-}
 
 
 class ReminderWorker (val context: Context, params: WorkerParameters) : Worker(context, params) {
