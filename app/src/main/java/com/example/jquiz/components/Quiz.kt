@@ -14,6 +14,7 @@ import com.example.jquiz.viewmodels.DynamicSortViewModel
 import com.example.jquiz.viewmodels.MatchViewModel
 import com.example.jquiz.viewmodels.PrecisionViewModel
 import com.example.jquiz.viewmodels.QCMViewModel
+import com.example.jquiz.viewmodels.QuizSelectionViewModel
 import com.example.jquiz.viewmodels.QuizViewModel
 import com.example.jquiz.viewmodels.QuizViewModelFactory
 
@@ -23,6 +24,7 @@ fun Quizer (
     chosenType: QuestionKind?,
     chosenLevel: Difficulty,
     chosenDomains: List<Fields>,
+    model: QuizSelectionViewModel,
     onPrevious: () -> Unit
 ) {
 
@@ -31,22 +33,26 @@ fun Quizer (
     when (chosenType) {
 
         QuestionKind.QCM -> {
-            val vm : QCMViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            val vm : QCMViewModel = viewModel(key = model.quizSessionId.longValue.toString(),
+                factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
             QCM(vm, onPrevious )
         }
 
         QuestionKind.PRECISION -> {
-            val vm : PrecisionViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            val vm : PrecisionViewModel = viewModel(key = model.quizSessionId.longValue.toString(),
+                factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
             Precision(vm, onPrevious )
         }
 
         QuestionKind.DYNAMIC_SORT -> {
-            val vm : DynamicSortViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            val vm : DynamicSortViewModel = viewModel(key = model.quizSessionId.longValue.toString()
+                ,factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
             DynamicSort(vm, onPrevious )
         }
 
         QuestionKind.MATCH -> {
-            val vm : MatchViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
+            val vm : MatchViewModel = viewModel(key = model.quizSessionId.longValue.toString(),
+                factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
             Match( vm, onPrevious )
         }
 

@@ -22,14 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 
-/**
- * Un composable de carte générique pour afficher n'importe quel type de question.
- *
- * @param isCorrect Indique si la réponse de l'utilisateur était correcte.
- * @param questionContent Le slot pour afficher le contenu de la question (texte, liste, etc.).
- * @param userAnswerContent Le slot pour afficher la réponse de l'utilisateur.
- * @param correctAnswerContent Le slot (optionnel) pour afficher la bonne réponse si l'utilisateur s'est trompé.
- */
+
 @Composable
 fun GenericQuestionCard(
     isCorrect: Boolean,

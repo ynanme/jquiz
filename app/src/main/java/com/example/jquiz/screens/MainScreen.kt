@@ -72,7 +72,6 @@ fun MainScreen () {
                     entry<Screen.Quiz> { QuizScreen() }
                     entry<Screen.Learning> { LearningScreen() }
                     entry<Screen.History> { HistoryScreen(historyVm, { backStack+=Screen.ViewQuestions(it) }) }
-                    entry<Screen.Settings> {SettingsScreen()}
                     entry<Screen.ViewQuestions> {ViewQuestionsScreen(viewQuestionsVm ,it.gameId) }
                     entry<Screen.Account> { AccountScreen() }
                     entry<Screen.Notifications> { NotificationsScreen() }

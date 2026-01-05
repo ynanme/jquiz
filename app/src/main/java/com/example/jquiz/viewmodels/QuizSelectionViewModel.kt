@@ -41,6 +41,9 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
     )
     val shouldAskNotificationPermission = mutableStateOf(false)
 
+    var quizSessionId = mutableLongStateOf(0)
+        private set
+
 
 
 
@@ -125,6 +128,7 @@ class QuizSelectionViewModel (application: Application): AndroidViewModel(applic
             if (accountManager.canQuiz()) {
                 accountManager.registerNewQuiz()
                 canQuiz.value = true
+                quizSessionId.longValue++
                 step.value = Step.QUIZ
                 return@launch
             }

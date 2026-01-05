@@ -24,14 +24,9 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class MatchViewModel(application: Application, domains: List<Fields>, level: Difficulty, ) :
+class MatchViewModel(application: Application, domains: List<Fields>, level: Difficulty ) :
     QuizViewModel(application, domains, level)
 {
-    override val questionsCount = when (level) {
-        Difficulty.EASY -> 4
-        Difficulty.MEDIUM -> 6
-        Difficulty.HARD -> 8
-    }
 
 
     private val _question = MutableStateFlow<MatchQuestion?>(null)
@@ -87,8 +82,8 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
         correctAnswersCount = 0
         viewModelScope.launch {
             launchGame()
+            generateQuestion()
         }
-        generateQuestion()
     }
 
     fun getQuizResult(): QuizResult {

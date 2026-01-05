@@ -48,7 +48,11 @@ fun FilterDropDown(onFilterSelected: (GameFilter) -> Unit) {
     val filterOptions = mapOf(
         "All" to GameFilter.ALL,
         "Won" to GameFilter.WON,
-        "Lost" to GameFilter.LOST
+        "Lost" to GameFilter.LOST,
+        "Highest Score" to GameFilter.HIGHEST_SCORE,
+        "Lowest Score" to GameFilter.LOWEST_SCORE,
+        "Most Recent" to GameFilter.MOST_RECENT,
+        "Least Recent" to GameFilter.LEAST_RECENT
     )
 
     Box(

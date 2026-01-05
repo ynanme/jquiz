@@ -31,7 +31,13 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     public var quizIsOver = mutableStateOf(false)
     protected lateinit var game: Game
     protected var correctAnswersCount = 0
-    abstract val questionsCount : Int
+    protected val questionsCount  =
+        when (level) {
+            Difficulty.EASY -> 4
+            Difficulty.MEDIUM -> 6
+            Difficulty.HARD -> 8
+        }
+
     protected var currentGameId: Long? = null
 
     public abstract fun reset();
@@ -61,7 +67,7 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     suspend fun launchGame() {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
         val current = LocalDateTime.now().format(formatter)
-        val newGame = Game(finalScore = 0, date = current, difficulty = level.value, endedGame = false, type = getQuestionKind())
+        val newGame = Game(finalScore = 0, date = current, difficulty = level.value.average().toInt(), endedGame = false, type = getQuestionKind())
 
         val generatedId = gameDao.AddGame(newGame)
         currentGameId = generatedId
@@ -72,8 +78,8 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     init{
         viewModelScope.launch {
             launchGame()
+            generateQuestion()
         }
-        generateQuestion()
     }
 }
 

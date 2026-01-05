@@ -25,7 +25,7 @@ interface  HistoricEventsDao : DataSource<HistoricEvent>,SeedableDao<HistoricEve
     @Query("SELECT COUNT(*) FROM HistoricEvent")
     override suspend fun count(): Int
 
-    @Query("""SELECT * FROM HistoricEvent WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
-    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<HistoricEvent>
+    @Query("""SELECT * FROM HistoricEvent WHERE notoriety BETWEEN :min AND :max ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, min: Int, max : Int): List<HistoricEvent>
 
 }

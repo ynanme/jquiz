@@ -15,10 +15,12 @@ class PrecisionGenerator<T : Any> : QuestionGenerator<T> {
 
     override suspend fun generate(spec: QuestionSpec, dao: DataSource<T>): Question? {
 
-        val row: T = dao.selectRandomRows(spec.count, spec.difficulty.value).firstOrNull() ?: run {
+        val row: T = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).firstOrNull() ?: run {
             return null
         }
 
+        val difficulty = row::class.memberProperties.find { it.name == "notoriety" }?.getter?.call(row)
+            .toString().toInt()
         val allProps = row::class.memberProperties
 
         val objectNameProp = allProps.firstOrNull { it.findAnnotation<ObjectName>() != null } ?: return null
@@ -39,7 +41,7 @@ class PrecisionGenerator<T : Any> : QuestionGenerator<T> {
         return PrecisionQuestion(
             spec.field,
             QuestionKind.PRECISION,
-            spec.difficulty.value,
+            difficulty,
             answer = v,
             label = label,
             objectName = objectName

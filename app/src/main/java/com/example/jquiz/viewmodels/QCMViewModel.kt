@@ -24,8 +24,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 
-class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty,
-                    override val questionsCount: Int = 5
+class QCMViewModel (application: Application, domains: List<Fields>, level: Difficulty
 ): QuizViewModel(application, domains, level) {
 
 
@@ -35,7 +34,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         QCM(
             domains.random(),
             QuestionKind.QCM,
-            Difficulty.MEDIUM.value,
+            Difficulty.MEDIUM.value.average().toInt(),
             "Question",
             "Answer",
             listOf("Choices")
@@ -75,8 +74,10 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         currentQuestionIndex.intValue = 1
         givenAnswer.value = ""
         correctAnswersCount = 0
-        viewModelScope.launch { launchGame() }
-        generateQuestion()
+        viewModelScope.launch {
+            launchGame()
+            generateQuestion()
+        }
     }
 
     override fun getQuestionKind(): QuestionKind {

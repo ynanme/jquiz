@@ -24,6 +24,6 @@ interface  CountriesDao : DataSource<Country>, SeedableDao<Country> {
     @Query("SELECT COUNT(*) FROM Country")
     override suspend fun count(): Int
 
-    @Query("""SELECT * FROM Country WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
-    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<Country>
+    @Query("""SELECT * FROM Country WHERE notoriety BETWEEN :min AND :max ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, min: Int, max : Int): List<Country>
 }

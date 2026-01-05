@@ -1,6 +1,7 @@
 package com.example.jquiz.services
 
 import com.example.jquiz.data.annotations.ObjectName
+import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.QuestionKind
 import com.example.jquiz.dto.MatchItem
 import com.example.jquiz.dto.MatchQuestion
@@ -17,11 +18,18 @@ class MatchGenerator<T: Any>: QuestionGenerator<T> {
         spec: QuestionSpec,
         dao: DataSource<T>
     ): Question? {
-        val elements = dao.selectRandomRows(spec.count, spec.difficulty.value).toMutableList()
+        val elements = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).toMutableList()
         if (elements.size < spec.count) {
-            val remainingElements = dao.selectRandomRows(spec.count - elements.size, 1)
+            val remainingElements = dao.selectRandomRows(spec.count - elements.size, Difficulty.EASY.value.first,
+                Difficulty.HARD.value.last)
             elements.addAll(remainingElements)
         }
+
+        val meanDifficulty = elements.map { element ->
+            val notorietyProperty = element::class.memberProperties.find { it.name == "notoriety" }
+            (notorietyProperty?.getter?.call(element) as? Number)?.toDouble() ?: spec.difficulty.value.average()
+        }.average().toInt()
+
         val row = elements.random()
 
         val allProps = row::class.memberProperties
@@ -45,7 +53,7 @@ class MatchGenerator<T: Any>: QuestionGenerator<T> {
         return MatchQuestion(
             spec.field,
             QuestionKind.MATCH,
-            spec.difficulty.value,
+            meanDifficulty,
             label = randomProp.name,
             items = items,
         )

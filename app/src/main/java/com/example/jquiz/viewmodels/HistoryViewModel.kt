@@ -29,6 +29,10 @@ class HistoryViewModel(application: Application) : AndroidViewModel(application)
                 GameFilter.ALL -> games
                 GameFilter.WON -> games.filter { it.finalScore >= 50 }
                 GameFilter.LOST -> games.filter { it.finalScore < 50 }
+                GameFilter.HIGHEST_SCORE -> games.sortedByDescending { it.finalScore }
+                GameFilter.LOWEST_SCORE -> games.sortedBy { it.finalScore }
+                GameFilter.MOST_RECENT -> games.sortedByDescending { it.date }
+                GameFilter.LEAST_RECENT -> games.sortedBy { it.date }
             }
         }
     }

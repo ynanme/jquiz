@@ -1,6 +1,7 @@
 package com.example.jquiz.services
 
 import com.example.jquiz.data.annotations.ObjectName
+import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.dto.Info
 import com.example.jquiz.interfaces.DataSource
 import kotlin.reflect.full.findAnnotation
@@ -11,7 +12,7 @@ class InfoGenerator<T: Any> {
 
     suspend fun generate(dao: DataSource<T>): Info {
 
-        val element = dao.selectRandomRows(1, 0).first()
+        val element = dao.selectRandomRows(1, Difficulty.EASY.value.first, Difficulty.HARD.value.last).first()
 
         val columns = element::class.memberProperties
             .filter { it.name !in listOf("id", "notoriety") }

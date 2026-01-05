@@ -1,7 +1,7 @@
 package com.example.jquiz.data.enums
 
-enum class Difficulty(val value: Int) {
-    EASY(1),
-    MEDIUM(2),
-    HARD(3)
+enum class Difficulty(val value: IntRange) {
+    EASY(1..2),
+    MEDIUM(3..3),
+    HARD(4..5)
 }

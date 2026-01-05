@@ -18,9 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty,
-                         override val questionsCount: Int = 5
-) :
+class PrecisionViewModel(application: Application, domains: List<Fields>, level: Difficulty) :
     QuizViewModel(application, domains, level) {
 
     private val _question = MutableStateFlow<PrecisionQuestion?>(null)
@@ -69,8 +67,8 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
         quizIsOver.value = false
         viewModelScope.launch {
             launchGame()
+            generateQuestion()
         }
-        generateQuestion()
     }
 
     override fun getQuestionKind(): QuestionKind {

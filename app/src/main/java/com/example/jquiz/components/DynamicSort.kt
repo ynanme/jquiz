@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DividerDefaults
@@ -133,17 +135,20 @@ fun SortedItems(items: List<DynamicSortItem?>, slotBounds: SnapshotStateMap<Int,
                 .fillMaxHeight()
                 .background(MaterialTheme.colorScheme.outlineVariant)
         )
-
         Spacer(Modifier.width(12.dp))
 
-        Column(
+        LazyColumn(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            items.forEachIndexed { index, item -> item?.let {
-                if (showSlots) DropSlot(index) { i, rect -> slotBounds[i] = rect }
-                ItemCard(item, true, evaluator(item))
-            } }
-            if (showSlots) DropSlot(items.size) { i, rect -> slotBounds[i] = rect }
+            itemsIndexed(items) { index, item ->
+                item?.let {
+                    if (showSlots) DropSlot(index) { i, rect -> slotBounds[i] = rect }
+                    ItemCard(item, true, evaluator(item))
+                }
+            }
+            item {
+                if (showSlots) DropSlot(items.size) { i, rect -> slotBounds[i] = rect }
+            }
         }
     }
 }

@@ -70,6 +70,7 @@ fun QuizScreen (model: QuizSelectionViewModel = viewModel()) {
                     model.chosenType.value,
                     model.chosenLevel.value,
                     model.chosenDomains,
+                    model,
                 ) { model.previous() }
             }
         }

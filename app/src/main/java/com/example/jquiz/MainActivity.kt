@@ -46,7 +46,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            Knowledge.getDB(applicationContext)
+            val db = Knowledge.getDB(applicationContext)
+            db.planetsDao().count()
         }
         createChannel(this)
         enableEdgeToEdge()

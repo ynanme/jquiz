@@ -25,6 +25,6 @@ interface  PlanetsDao : DataSource<Planet> ,SeedableDao<Planet>{
     @Query("SELECT COUNT(*) FROM Planet")
     override suspend fun count() : Int
 
-    @Query("""SELECT * FROM Planet WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
-    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<Planet>
+    @Query("""SELECT * FROM Planet WHERE notoriety BETWEEN :min AND :max ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, min: Int, max : Int): List<Planet>
 }

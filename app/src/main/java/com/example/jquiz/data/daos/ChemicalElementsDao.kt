@@ -25,8 +25,8 @@ interface  ChemicalElementsDao : DataSource<ChemicalElement>, SeedableDao<Chemic
     @Query("SELECT COUNT(*) FROM ChemicalElement")
     override suspend fun count(): Int
 
-    @Query("""SELECT * FROM ChemicalElement WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
-    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<ChemicalElement>
+    @Query("""SELECT * FROM ChemicalElement WHERE notoriety BETWEEN :min AND :max ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, min: Int, max : Int): List<ChemicalElement>
 
 
 }

@@ -25,7 +25,7 @@ interface  FootballTeamsDao : DataSource<FootballTeam>,SeedableDao<FootballTeam>
     @Query("SELECT COUNT(*) FROM FootballTeam")
     override suspend fun count(): Int
 
-    @Query("""SELECT * FROM FootballTeam WHERE notoriety >= :difficulty ORDER BY RANDOM() LIMIT :n""")
-    override suspend fun selectRandomRows(n: Int, difficulty: Int): List<FootballTeam>
+    @Query("""SELECT * FROM FootballTeam WHERE notoriety BETWEEN :min AND :max ORDER BY RANDOM() LIMIT :n""")
+    override suspend fun selectRandomRows(n: Int, min: Int, max : Int): List<FootballTeam>
 
 }

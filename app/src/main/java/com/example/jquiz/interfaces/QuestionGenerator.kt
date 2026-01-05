@@ -7,4 +7,5 @@ import com.example.jquiz.dto.QuestionSpec
 interface QuestionGenerator<T> {
 
     suspend fun  generate(spec : QuestionSpec, dao: DataSource<T>) : Question?
+
 }

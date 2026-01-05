@@ -1,6 +1,9 @@
 package com.example.jquiz.viewmodels
 
 import android.app.Application
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.Knowledge
@@ -14,7 +17,6 @@ class ViewQuestionsViewModel(application: Application) : AndroidViewModel(applic
     private val db = Knowledge.getDB(application)
     private val gameQuestionsDao = db.gameQuestionsDao()
     private val gameDao = db.gameDao()
-
 
     fun getGameQuestion(gameId: Int): Flow<List<GameQuestions>> {
         return gameQuestionsDao.LoadGameQuestionsByGameId(gameId)
