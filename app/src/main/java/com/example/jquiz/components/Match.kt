@@ -29,9 +29,6 @@ import com.example.jquiz.viewmodels.MatchViewModel
 
 @Composable
 fun Match(viewModel: MatchViewModel, onPrevious: () -> Unit) {
-    LaunchedEffect(Unit) {
-        viewModel.generateQuestion()
-    }
     if (viewModel.isQuizOver()) {
         QuizRecapBox(
             result = viewModel.getQuizResult(),

@@ -39,7 +39,7 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
     val question: StateFlow<MatchQuestion?> = _question
     var remainingMatches = questionsCount
 
-    fun generateQuestion() {
+    public override fun generateQuestion() {
         val spec = QuestionSpec(level, domains.random(), count = questionsCount)
         viewModelScope.launch {
             val generatedQuestion = when (spec.field) {

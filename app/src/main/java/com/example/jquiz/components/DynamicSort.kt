@@ -50,7 +50,10 @@ import androidx.compose.ui.unit.toSize
 @Composable
 fun DynamicSort(model: DynamicSortViewModel, onQuit: () -> Unit) {
 
-    if (!model.isQuizOver()) DynamicSortQuestionBox(model)
+
+    if (!model.isQuizOver()) {
+        DynamicSortQuestionBox(model)
+    }
     else {
         QuizRecapBox(model.getQuizResult(), { model.reset() }) { onQuit() }
     }

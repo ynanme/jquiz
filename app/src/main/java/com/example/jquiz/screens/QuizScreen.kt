@@ -7,8 +7,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jquiz.components.QuizCooldown
@@ -60,11 +60,18 @@ fun QuizScreen (model: QuizSelectionViewModel = viewModel()) {
         )
 
         Step.QUIZ -> {
-            Quizer(
+            key(
                 model.chosenType.value,
                 model.chosenLevel.value,
-                model.chosenDomains
-            ) { model.previous() }
+                model.chosenDomains.toList()
+            )
+            {
+                Quizer(
+                    model.chosenType.value,
+                    model.chosenLevel.value,
+                    model.chosenDomains,
+                ) { model.previous() }
+            }
         }
 
         Step.COOLDOWN -> {

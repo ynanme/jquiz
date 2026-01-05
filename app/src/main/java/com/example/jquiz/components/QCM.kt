@@ -26,7 +26,8 @@ import com.example.jquiz.viewmodels.QCMViewModel
 @Composable
 fun QCM(model: QCMViewModel, onQuit: () -> Unit) {
 
-    if (!model.isQuizOver()) {
+
+    if (!model.isQuizOver()){
         QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) {model.saveQuestion() ;model.goToNextQuestion() }
     } else {
         model.updateGame(true)

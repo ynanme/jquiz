@@ -25,9 +25,6 @@ import com.example.jquiz.viewmodels.PrecisionViewModel
 fun Precision(vm: PrecisionViewModel, onQuit: () -> Unit) {
     var over by vm.quizIsOver
     val currentQuestion = vm.question.collectAsState()
-    LaunchedEffect(Unit) {
-        vm.generateQuestion()
-    }
     if (over) {
         vm.updateGame(true)
         QuizRecapBox(vm.getPrecisionResult(), { vm.reset() }, onQuit)

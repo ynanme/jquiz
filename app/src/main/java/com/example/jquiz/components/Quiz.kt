@@ -32,26 +32,22 @@ fun Quizer (
 
         QuestionKind.QCM -> {
             val vm : QCMViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
-            vm.reset()
-            QCM(vm, onPrevious)
+            QCM(vm, onPrevious )
         }
 
         QuestionKind.PRECISION -> {
             val vm : PrecisionViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
-            vm.reset()
-            Precision(vm, onPrevious)
+            Precision(vm, onPrevious )
         }
 
         QuestionKind.DYNAMIC_SORT -> {
             val vm : DynamicSortViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
-            vm.reset()
-            DynamicSort(vm, onPrevious)
+            DynamicSort(vm, onPrevious )
         }
 
         QuestionKind.MATCH -> {
             val vm : MatchViewModel = viewModel(factory = QuizViewModelFactory(application, chosenDomains, chosenLevel))
-            vm.reset()
-            Match( vm, onPrevious)
+            Match( vm, onPrevious )
         }
 
 

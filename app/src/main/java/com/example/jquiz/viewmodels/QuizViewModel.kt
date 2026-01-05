@@ -36,9 +36,14 @@ abstract class QuizViewModel (application: Application, protected val domains: L
 
     public abstract fun reset();
 
+    protected abstract fun generateQuestion();
+
+
     fun isQuizOver (): Boolean {
         return quizIsOver.value
     }
+
+
 
     fun updateGame(endedGame: Boolean = true) {
         game.let { currentGame ->
@@ -68,6 +73,7 @@ abstract class QuizViewModel (application: Application, protected val domains: L
         viewModelScope.launch {
             launchGame()
         }
+        generateQuestion()
     }
 }
 

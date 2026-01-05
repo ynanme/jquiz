@@ -41,7 +41,6 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
 
 
 
-    init { generate() }
 
     private fun getNextItem (): DynamicSortItem? {
         return if (remainingItems.isNotEmpty()) {
@@ -99,7 +98,7 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         viewModelScope.launch {
             launchGame()
         }
-        generate()
+        generateQuestion()
     }
 
     private fun setupQuestion(question: DynamicSortQuestion) {
@@ -119,7 +118,7 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         }
     }
 
-    private fun generate() {
+    public override fun generateQuestion() {
         viewModelScope.launch {
             val domain = domains.random()
             val spec = QuestionSpec(level, domain, count = questionsCount+1)

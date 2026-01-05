@@ -28,7 +28,7 @@ class PrecisionViewModel(application: Application, domains: List<Fields>, level:
 
     var answeredQuestion = 0;
 
-    fun generateQuestion() {
+    public override fun generateQuestion() {
 
         viewModelScope.launch {
             val domain = domains.random()
