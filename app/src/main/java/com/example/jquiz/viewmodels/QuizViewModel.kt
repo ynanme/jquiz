@@ -31,7 +31,7 @@ abstract class QuizViewModel (application: Application, protected val domains: L
     public var quizIsOver = mutableStateOf(false)
     protected lateinit var game: Game
     protected var correctAnswersCount = 0
-    protected val questionsCount  =
+    protected var questionsCount  =
         when (level) {
             Difficulty.EASY -> 4
             Difficulty.MEDIUM -> 6
