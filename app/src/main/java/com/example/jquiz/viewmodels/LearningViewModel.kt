@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import com.example.jquiz.data.Knowledge
 import com.example.jquiz.data.enums.Fields
@@ -15,6 +16,7 @@ import com.example.jquiz.data.models.Planet
 import com.example.jquiz.dto.Info
 import com.example.jquiz.services.AccountManager
 import com.example.jquiz.services.InfoGenerator
+import com.example.jquiz.services.Translator
 import kotlinx.coroutines.launch
 
 
@@ -91,7 +93,7 @@ class LearningViewModel (application: Application): AndroidViewModel(application
         viewModelScope.launch {
             val domain = chosenDomains.random()
 
-            info.value = when (domain) {
+            val originalInfo = when (domain) {
                 Fields.CHEMICAL_ELEMENT -> {
                     val generator = InfoGenerator<ChemicalElement>()
                     generator.generate(chemicalElementsDao)
@@ -117,7 +119,11 @@ class LearningViewModel (application: Application): AndroidViewModel(application
                     generator.generate(countriesDao)
                 }
             }
-
+            val translatedValues = originalInfo.infos.mapKeys {
+                val resId = Translator.getLabelOrNull(application.applicationContext, it.key)
+                 resId ?: it.key
+            }
+            info.value = originalInfo.copy(infos = translatedValues)
         }
     }
 

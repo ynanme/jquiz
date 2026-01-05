@@ -25,23 +25,16 @@ class NotificationsViewModel (application: Application): AndroidViewModel(applic
 
     val reminder = NotificationsManager(application.notificationsDataStore)
     var frequency = reminder.getFrequencyFlow()
-    var granted = mutableStateOf(false)
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     fun setFrequency(newFrequency: Frequency) {
-        viewModelScope.launch { reminder.setFrequency(newFrequency) }
-        if (granted.value) reminder.schedule(newFrequency, application)
-    }
-
-    fun setPermissions (newGranted: Boolean) {
-        granted.value = newGranted
-        viewModelScope.launch { reminder.setPermissions(newGranted) }
-    }
-
-    init {
         viewModelScope.launch {
-            reminder.getPermissionsFlow().collect { granted.value = it }
+            reminder.setFrequency(newFrequency)
         }
+        reminder.schedule(newFrequency, application)
+    }
+    fun setPermissions (newGranted: Boolean) {
+        viewModelScope.launch { reminder.setPermissions(newGranted) }
     }
 
 }

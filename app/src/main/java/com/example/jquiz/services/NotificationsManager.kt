@@ -94,15 +94,26 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
     fun schedule (frequency: Frequency, context: Context) {
         val workManager = WorkManager.getInstance(context)
 
-        if (frequency == Frequency.NEVER) {
-            workManager.cancelUniqueWork(WORK_NAME)
-        } else {
+        when (frequency) {
+            Frequency.NEVER -> {
+                workManager.cancelUniqueWork(WORK_NAME)
+            }
+            Frequency.EVERY_MINUTE -> {
+                val request = OneTimeWorkRequestBuilder<ReminderWorker>()
+                    .setInitialDelay(1, TimeUnit.MINUTES)
+                    .build()
+
+                workManager.enqueueUniqueWork(
+                    WORK_NAME,
+                    ExistingWorkPolicy.REPLACE,
+                    request)
+            }
+            else -> {
                 val repeatInterval = when (frequency) {
                     Frequency.HOURLY -> 1L to TimeUnit.HOURS
                     Frequency.DAILY  -> 1L to TimeUnit.DAYS
                     Frequency.WEEKLY -> 7L to TimeUnit.DAYS
-                    Frequency.EVERY_MINUTE -> 1L to TimeUnit.MINUTES
-                    Frequency.NEVER -> TODO()
+                    else -> return
                 }
 
                 val request = PeriodicWorkRequestBuilder<ReminderWorker>(
@@ -117,8 +128,9 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
                 )
             }
         }
-
     }
+
+}
 
 
 
@@ -126,7 +138,7 @@ class ReminderWorker (val context: Context, params: WorkerParameters) : Worker(c
 
     override fun doWork(): Result {
         val text = inputData.getString("notification_text")
-            ?: "mind to jquiz a lil bit ?"
+            ?: "What do you think about some quizzes right now?"
 
         createNotification(context, text)
         return Result.success()
@@ -136,7 +148,7 @@ class ReminderWorker (val context: Context, params: WorkerParameters) : Worker(c
 }
 
 
-fun createNotification (context: Context, text: String = "mind to jquiz a lil bit ?") {
+fun createNotification (context: Context, text: String ) {
     val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     val intent = Intent(context, MainActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(

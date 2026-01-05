@@ -31,7 +31,6 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
 ): QuizViewModel(application, domains, level) {
 
     var question = mutableStateOf<DynamicSortQuestion?>(null)
-
     private var remainingItems = mutableStateListOf<DynamicSortItem>()
     var sortedItems = mutableStateListOf<DynamicSortItem>()
     var itemToSort = mutableStateOf<DynamicSortItem?>(null)
@@ -166,6 +165,10 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
 
     override fun getQuestionKind(): QuestionKind {
         return QuestionKind.DYNAMIC_SORT
+    }
+
+    init {
+        questionsCount = 6
     }
 
 }

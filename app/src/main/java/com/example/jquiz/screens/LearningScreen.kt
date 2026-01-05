@@ -46,7 +46,7 @@ fun LearningScreen (model: LearningViewModel = viewModel()) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text("You not premium bro")
+            Text("You need to be a premium user to access this feature")
         }
     } else {
         var step by model.step
