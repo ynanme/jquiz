@@ -80,7 +80,7 @@ class DynamicSortViewModel (application: Application, domains: List<Fields>, lev
         val data = question.value!!.items.map { it.label }
         val gameQuestion = GameQuestions(
             gameId = game.id,
-            isCorrect = correctAnswersCount == questionsCount,
+            isCorrect = correctAnswersCount == (question.value?.items?.size?.minus(1) ?: questionsCount),
             questionData = Json.encodeToString(value = data),
             correctAnswer = Json.encodeToString(value = sortedItemsLabels),
             userAnswer = Json.encodeToString(value = userAnswers.toList())

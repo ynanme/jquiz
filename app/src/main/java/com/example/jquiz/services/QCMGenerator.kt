@@ -17,17 +17,16 @@ class QCMGenerator<T: Any>: QuestionGenerator<T> {
     override suspend fun generate(spec: QuestionSpec, dao: DataSource<T>): Question? {
 
 
-        val elements = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).toMutableList()
-        if (elements.size < spec.count) {
-           elements.addAll(dao.selectRandomRows(spec.count - elements.size, Difficulty.EASY.value.first, Difficulty.HARD.value.last))
+        var elements = dao.selectRandomRows(1, spec.difficulty.value.first, spec.difficulty.value.last)
+        if (elements.isEmpty()) {
+           elements = dao.selectRandomRows(1, Difficulty.EASY.value.first, Difficulty.HARD.value.last)
         }
+
+        if (elements.isEmpty()) return null
 
         val correctElement = elements.random()
 
-        val meanDifficulty = elements.map { element ->
-            val notorietyProperty = element::class.memberProperties.find { it.name == "notoriety" }
-            (notorietyProperty?.getter?.call(element) as? Number)?.toDouble() ?: spec.difficulty.value.average()
-        }.average().toInt()
+        val difficulty = correctElement::class.memberProperties.find { it.name == "notoriety" }?.getter?.call(correctElement).toString().toInt()
 
         val columns = correctElement::class.memberProperties
             .filter { it.findAnnotation<ObjectName>() == null }
@@ -50,12 +49,10 @@ class QCMGenerator<T: Any>: QuestionGenerator<T> {
 
         val choices = (otherChoices + answer).shuffled()
 
-
-
         return QCM(
             spec.field,
             QuestionKind.QCM,
-            meanDifficulty,
+            difficulty,
             "${column.name} of $element",
             answer,
             choices

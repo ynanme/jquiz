@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.jquiz.dto.QCM
-import com.example.jquiz.viewmodels.PrecisionViewModel
 import com.example.jquiz.viewmodels.QCMViewModel
 
 
@@ -28,7 +27,7 @@ fun QCM(model: QCMViewModel, onQuit: () -> Unit) {
 
 
     if (!model.isQuizOver()){
-        QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) {model.saveQuestion() ;model.goToNextQuestion() }
+        QCMQuestionBox(model.getCurrentQuestion(), model.getCurrentGivenAnswer(), { model.giveAnswer(it) }) { model.saveQuestion(); model.goToNextQuestion() }
     } else {
         model.updateGame(true)
         QuizRecapBox(model.getQCMResult(), { model.reset() }, { onQuit() })

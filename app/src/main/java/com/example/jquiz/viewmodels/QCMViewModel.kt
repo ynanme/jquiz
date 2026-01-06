@@ -40,6 +40,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
             listOf("Choices")
         )
     )
+    private var evaluated = mutableStateOf(false)
 
 
 
@@ -51,8 +52,12 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
         return givenAnswer.value
     }
 
+
     fun giveAnswer(answer: String) {
-        givenAnswer.value = answer
+        if (!evaluated.value) {
+            givenAnswer.value = answer
+            evaluated.value = true
+        }
     }
 
     fun goToNextQuestion() {
@@ -142,6 +147,7 @@ class QCMViewModel (application: Application, domains: List<Fields>, level: Diff
                     originalLabel.replaceFirst(propertyName!!, translatedProperty)
             }
             question.value = (generatedQuestion as? QCM)!!
+            evaluated.value = false
         }
     }
 }

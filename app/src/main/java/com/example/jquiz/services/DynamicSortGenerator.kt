@@ -19,17 +19,7 @@ class DynamicSortGenerator<T: Any>: QuestionGenerator<T> {
     override suspend fun generate(spec: QuestionSpec, dao: DataSource<T>): Question? {
 
 
-        var elements  = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).distinct()
-        if (elements.size < spec.count) {
-            elements = elements.toMutableList()
-            val remainingElements = dao.selectRandomRows(50, Difficulty.EASY.value.first, Difficulty.HARD.value.last).distinct().filter { it !in elements }.take(spec.count - elements.size)
-            elements.addAll(remainingElements)
-        }
-
-        val meanDifficulty = elements.map { element ->
-            val notorietyProperty = element::class.memberProperties.find { it.name == "notoriety" }
-            (notorietyProperty?.getter?.call(element) as? Number)?.toDouble() ?: spec.difficulty.value.average()
-        }.average().toInt()
+        var elements  = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last)
 
         val randomElement = elements.random()
 
@@ -43,6 +33,21 @@ class DynamicSortGenerator<T: Any>: QuestionGenerator<T> {
         if (columns.isEmpty()) return null
 
         val column = columns.random()
+
+        elements = elements.distinctBy { column.getter.call(it) }.toMutableList()
+        val values = elements.map { column.getter.call(it) }
+        if (elements.size < spec.count) {
+            val remainingElements = dao.selectRandomRows(50, Difficulty.EASY.value.first, Difficulty.HARD.value.last)
+                .distinctBy { column.getter.call(it) }
+                .filter { it !in elements && column.getter.call(it) !in values }
+                .take(spec.count - elements.size)
+            elements.addAll(remainingElements)
+        }
+
+        val meanDifficulty = elements.map { element ->
+            val notorietyProperty = element::class.memberProperties.find { it.name == "notoriety" }
+            (notorietyProperty?.getter?.call(element) as? Number)?.toDouble() ?: spec.difficulty.value.average()
+        }.average().toInt()
 
         val items = elements.map { DynamicSortItem(objectName?.getter?.call(it).toString(), column.getter.call(it) as Int) }
 
