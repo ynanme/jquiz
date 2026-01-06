@@ -5,12 +5,10 @@ import com.example.jquiz.data.enums.Difficulty
 import com.example.jquiz.data.enums.QuestionKind
 import com.example.jquiz.dto.DynamicSortItem
 import com.example.jquiz.dto.DynamicSortQuestion
-import com.example.jquiz.dto.QCM
 import com.example.jquiz.dto.Question
 import com.example.jquiz.dto.QuestionSpec
 import com.example.jquiz.interfaces.DataSource
 import com.example.jquiz.interfaces.QuestionGenerator
-import kotlin.collections.distinctBy
 import kotlin.collections.toMutableList
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.memberProperties
@@ -21,10 +19,10 @@ class DynamicSortGenerator<T: Any>: QuestionGenerator<T> {
     override suspend fun generate(spec: QuestionSpec, dao: DataSource<T>): Question? {
 
 
-        var elements  = dao.selectRandomRows(spec.count-1, spec.difficulty.value.first, spec.difficulty.value.last)
+        var elements  = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).distinct()
         if (elements.size < spec.count) {
             elements = elements.toMutableList()
-            val remainingElements = dao.selectRandomRows(spec.count - elements.size, Difficulty.EASY.value.first, Difficulty.HARD.value.last)
+            val remainingElements = dao.selectRandomRows(50, Difficulty.EASY.value.first, Difficulty.HARD.value.last).distinct().filter { it !in elements }.take(spec.count - elements.size)
             elements.addAll(remainingElements)
         }
 

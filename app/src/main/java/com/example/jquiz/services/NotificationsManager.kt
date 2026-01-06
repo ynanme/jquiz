@@ -23,7 +23,6 @@ import com.example.jquiz.MainActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import java.util.Collections.frequency
 import java.util.concurrent.TimeUnit
 
 
@@ -33,7 +32,7 @@ const val WORK_NAME = "reminder_work"
 
 
 enum class Frequency {
-    EVERY_MINUTE,
+    IN_THE_NEXT_MINUTE,
     HOURLY,
     DAILY,
     WEEKLY,
@@ -98,7 +97,7 @@ class NotificationsManager (private val notifications: DataStore<Preferences>) {
             Frequency.NEVER -> {
                 workManager.cancelUniqueWork(WORK_NAME)
             }
-            Frequency.EVERY_MINUTE -> {
+            Frequency.IN_THE_NEXT_MINUTE -> {
                 val request = OneTimeWorkRequestBuilder<ReminderWorker>()
                     .setInitialDelay(1, TimeUnit.MINUTES)
                     .build()

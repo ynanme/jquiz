@@ -54,9 +54,9 @@ fun NotificationsScreen (model: NotificationsViewModel = viewModel()) {
         Spacer(Modifier.height(8.dp))
 
         ReminderOption(
-            label = "Every minute",
-            selected = selected == Frequency.EVERY_MINUTE,
-            onClick = { permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS); model.setFrequency(Frequency.EVERY_MINUTE) }
+            label = "In the next minute",
+            selected = selected == Frequency.IN_THE_NEXT_MINUTE,
+            onClick = { permissionLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS); model.setFrequency(Frequency.IN_THE_NEXT_MINUTE) }
         )
 
         ReminderOption(

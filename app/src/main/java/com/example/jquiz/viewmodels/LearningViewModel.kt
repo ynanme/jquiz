@@ -66,7 +66,11 @@ class LearningViewModel (application: Application): AndroidViewModel(application
 
     fun previous () {
         if (step.value == StepL.DOMAINS_SELECTION) step.value = StepL.HOME
-        if (step.value == StepL.LEARNING) step.value = StepL.DOMAINS_SELECTION
+        if (step.value == StepL.LEARNING) {
+            step.value = StepL.DOMAINS_SELECTION
+            chosenDomains.clear()
+            flipped.value = false
+        }
     }
 
 
