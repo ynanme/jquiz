@@ -19,10 +19,10 @@ class MatchGenerator<T: Any>: QuestionGenerator<T> {
         dao: DataSource<T>
     ): Question? {
         val elements = dao.selectRandomRows(spec.count, spec.difficulty.value.first, spec.difficulty.value.last).toMutableList()
-        if (elements.size < spec.count) {
-            val remainingElements = dao.selectRandomRows(spec.count - elements.size, Difficulty.EASY.value.first,
+        while (elements.size < spec.count) {
+            val remainingElements = dao.selectRandomRows(8, Difficulty.EASY.value.first,
                 Difficulty.HARD.value.last)
-            elements.addAll(remainingElements)
+            elements.addAll(remainingElements.filter { it !in elements }.take(spec.count - elements.size))
         }
 
         val meanDifficulty = elements.map { element ->
