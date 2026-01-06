@@ -28,7 +28,6 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
     QuizViewModel(application, domains, level)
 {
 
-
     private val _question = MutableStateFlow<MatchQuestion?>(null)
     private val userAnswers = mutableListOf<MatchItem>()
     val question: StateFlow<MatchQuestion?> = _question
@@ -80,6 +79,8 @@ class MatchViewModel(application: Application, domains: List<Fields>, level: Dif
         _question.value = null
         quizIsOver.value = false
         correctAnswersCount = 0
+        userAnswers.clear()
+        remainingMatches = questionsCount
         viewModelScope.launch {
             launchGame()
             generateQuestion()
