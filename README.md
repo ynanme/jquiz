@@ -1,44 +1,107 @@
-# Groupe Z
+# JQuiz
 
-Idris Mohamed BENARBIA  
-Yendoumban NANMEDIGOU
+JQuiz is an Android quiz application developed in Kotlin as a two-person academic project at **Université Paris Cité**.
 
----
+The application dynamically generates different types of quizzes from structured datasets and provides multiple difficulty levels, learning features, game history, notifications and UI customization.
 
-## Règles de jeu (Fonctionnalités supplémentaires)
+## Features
 
-### Types de quiz
+### Quiz modes
 
-En plus des types questions à choix multiples, questions de précision et dynamic sort proposés, nous avons ajouté un le matching quiz. Il consiste à faire correspondre les éléments deux à deux dans une liste d'informations donnée.  
-Par exemple, dans une liste de faits historiques et de dates, il faudra matcher chaque fait avec sa date.
+JQuiz supports four types of questions:
 
-### Learning
+- **Multiple choice** — select the correct answer among several options
+- **Precision** — provide or select a precise value
+- **Dynamic sort** — reorder elements according to a given property
+- **Matching** — match related elements together
 
-Nous avons rajouter la possibilité, pour les utilisateurs premium uniquement, de s'entraîner (apprendre) avant un quiz. En choisissant les domaines souhaités, l'utilisateur a accès à des flip cards d'infos (l'élément concerné en front et les infos associées en back).  
-Une carte sur la planète Jupiter révèlera donc derrière son diamètre, sa position dans le système solaire et sa température.
+For example, a matching quiz can associate historical events with their corresponding dates.
 
----
+### Knowledge domains
 
-## Données
+Questions are generated from five domains:
 
-### Nature
+- Geography
+- History
+- Sports
+- Astronomy
+- Chemistry
 
-Nous avons choisi 5 domaines: Geopgraphy, History, Sports, Astronomy et Chemistry. Ils ont nécessités donc respectivement la création des tables Country, HistoricEvent, FootballTeam, Planet et ChemicalElement.  
-La création des tables Game et GameQuestion a elle été nécessaire pour implémenter la fonctionnalité d'historique.
+Each domain has its own data model, such as countries, historical events, football teams, planets and chemical elements.
 
-### Acquisition
+### Difficulty
 
-Les tables, comportant une cinquantaine de ligne chacune (sauf Planet qui en comporte 8), contiennent des informations dont ChatGPT est la source. Nous les avons récupérer sous forme de json (on peut les retrouver dans le dossier assets) puis insérer dans la BD à la création (voir la classe data/seed/DatabaseSeeder)
+Difficulty is based on the notoriety of the information used to generate a question.
 
----
+For example, highly recognizable countries can be used for easier geography questions, while less familiar ones are selected for higher difficulty levels.
 
-## Autres informations
+### Learning mode
 
-### Gestion de difficulté
+A learning mode allows users to review information before taking a quiz.
 
-Nous avons opté pour une gestion de la difficulté basé sur le choix de la question. Nos tables contiennent en effet une colonne notoriety qui rend compte de la popularité de l'information.  
-Dans la table Country par exemple, la ligne sur la France sera de notoriety 1 alors que celle sur l'Albanie sera de notoriety 3. La difficulté d'une question sera donc fonction de la popularité des informations qu'elle demande à l'utilisateur.
+The selected domains are presented as flip cards, with the entity on the front and its associated information on the back.
 
-### Plus réalisés
+### Additional features
 
-En plus d'une interface ergonomique et agréable, le rappel par notification pour jouer (avec choix de la fréquence possible) et le paramètrage du thème de l'application ont été traités.
+- Game history
+- Configurable quiz difficulty
+- Reminder notifications with configurable frequency
+- Theme and appearance settings
+- Local persistence of application data and preferences
+
+## Tech Stack
+
+- **Kotlin**
+- **Jetpack Compose**
+- **Room**
+- **DataStore**
+- **WorkManager**
+- **Gradle**
+- **Android Studio**
+
+The application follows an MVVM-oriented architecture, separating UI, application state and data access.
+
+## Data
+
+The application database is initialized from JSON datasets bundled with the project.
+
+The seed datasets were generated with the assistance of ChatGPT for the purposes of this academic project and are not intended to be used as authoritative reference datasets.
+
+Database initialization is handled by:
+
+```text
+data/seed/DatabaseSeeder
+```
+
+## Project Structure
+
+The application is organized around:
+
+- UI screens and reusable Compose components
+- ViewModels for application state and business logic
+- Room entities and DAOs for persistent data
+- Generic quiz-generation logic
+- DataStore for user preferences
+- WorkManager for scheduled notifications
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ynanme/jquiz.git
+cd jquiz
+```
+
+Open the project in **Android Studio** and let Gradle synchronize the dependencies.
+
+You can then run the application on an Android emulator or a compatible physical device.
+
+## Authors
+
+Developed by:
+
+- [Yendoumban NANMEDIGOU](https://github.com/ynanme)
+- [Mohamed Idris BENARBIA](https://github.com/JupiterRoue45)
+
+as an academic group project at **Université Paris Cité**.
