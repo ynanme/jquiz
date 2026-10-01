@@ -1,35 +1,23 @@
-# === IntelliJ / Android Studio ===
+# IntelliJ / Android Studio
 *.iml
-.gradle
-/local.properties
+.gradle/
+.idea/
+local.properties
 
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-/.idea/gradle.xml
-/.idea/misc.xml
-/.idea/.name
-/.idea/shelf/
-/.idea/deploymentTargetSelector.xml
-.idea/deviceManager.xml
-.idea/inspectionProfiles/Project_Default.xml
-.idea/studiobot.xml
-
-# === Kotlin internal ===
+# Kotlin
 .kotlin/
 
-# === macOS ===
+# Build outputs
+build/
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+*.aab
+
+# Signing / secrets
+*.jks
+*.keystore
+
+# macOS
 .DS_Store
-
-# === Build outputs ===
-/build
-/captures
-.externalNativeBuild
-.cxx
-
-# === Others (optional but common) ===
-/*.apk
-/*.aab
